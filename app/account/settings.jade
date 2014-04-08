@@ -1,0 +1,27 @@
+.pages-container
+  include ../common/buzzr-logo
+
+  h1.center.margin-top(ng-hide="email.valid") Please complete your signup:
+  h1.center.margin-top(ng-show="email.valid") Settings
+
+  form.form.center(name="profileForm")
+    .form-group
+      label Email*
+      input(name="email", type="text", placeholder="Email", ng-model="currentUser.email", required)
+    
+    .form-group(ng-show="email.valid")
+      label Name
+      input(name="name", type="text", placeholder="Name", ng-model="currentUser.name")
+    
+    .form-group(ng-show="email.valid")
+      label Password
+      input(name="password", type="password", placeholder="Password", ng-model="currentUser.password")
+  
+    .form-group
+      button.button-black(ng-click="update()", ng-disabled="profileForm.$invalid") Submit
+      br
+      span.required * required
+    
+    .form-group.notifier
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}

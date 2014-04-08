@@ -1,0 +1,39 @@
+.feedback(ng-controller="appFeedbackCtrl")
+  .feedback-button(ng-click="toggle()") ?
+
+  .feedback-popop(ng-class="{'show': show}")
+    .feedback-form
+      .feedback-close(ng-click="toggle()") &times;
+      
+      h2.italic Feedback / Help
+      form.form(name="feedbackForm", ng-hide="success")
+        .form-group
+          label Email*
+          input(type="email", ng-model="feedback.email", required)
+        
+        .form-group
+          label Name*
+          input(ng-model="feedback.name", required)
+        
+        .form-group
+          label Your message*
+          textarea(ng-model="feedback.message", required)
+        
+        .form-group
+          button.button-black(ng-click="send()", ng-disabled="feedbackForm.$invalid") Send
+          br
+          span.required * required
+        
+        .form-group.notifier
+          .error {{notifier.error}}
+          .notice {{notifier.notice}}
+      
+      h3.margin-top(ng-show="success")
+        strong Thank you!
+        br
+        | We reply to all our mail within 24hrs.
+        br
+        br
+        | Talk soon,
+        br
+        | Properly Team

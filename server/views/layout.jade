@@ -1,0 +1,51 @@
+doctype
+html(lang="en", itemtype="http://schema.org/WebPage", itemscope)
+  head
+    title(itemprop="name") Properly
+    
+    meta(charset="utf-8")
+    meta(content="width=device-width, initial-scale=1.0", name="viewport")
+    //-meta(content="00000000", property="twitter:account_id")
+    //-meta(content="", name="description", itemprop="description")
+    //-meta(content="", name="keywords")
+
+    link(rel="apple-touch-icon" sizes="144x144" href="/img/favicon144.png" itemprop="image")
+    link(rel="apple-touch-icon" sizes="114x114" href="/img/favicon114.png")
+    link(rel="apple-touch-icon" sizes="72x72" href="/img/favicon72.png")
+    link(rel="apple-touch-icon" href="/img/favicon57.png")
+    link(rel="shortcut icon" href="/img/favicon.ico")
+    //-link(href="https://plus.google.com/xxx", rel="publisher")
+   
+    | <style type='text/css'>
+    include ../../public/css/application.css
+    | </style>
+
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      //ga('create', 'UA-49293054-1', 'properly.herokuapp.com');
+      //ga('send', 'pageview');
+
+    <!--[if IE]>
+    <script src="/js/iewarning/warning.js"></script>
+    <script>window.onload=function(){e("/js/iewarning/")}</script>
+    <![endif]-->
+
+  body(ng-app="app")
+    include ../../app/header/header
+    div.app-view(ng-view)
+      block main-content
+    include ../../app/feedback/feedback
+
+
+    if !!bootstrappedUser
+      script.
+        window.bootstrappedUser = !{JSON.stringify(bootstrappedUser.safe())}
+    script(type="text/javascript", src="/js/vendor.js")
+    if !!admin
+      script(type="text/javascript", src="/js/admin.js")
+    else
+      script(type="text/javascript", src="/js/application.js")
+    //-script(type="text/javascript", src="//platform.twitter.com/widgets.js", async)

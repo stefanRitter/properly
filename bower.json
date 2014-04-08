@@ -1,0 +1,23 @@
+{
+  "name": "Properly",
+  "version": "0.0.0",
+  "homepage": "",
+  "authors": [
+    "stefanRitter <stefan@stefanritter.com>"
+  ],
+  "license": "private",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.12",
+    "angular-resource": "~1.2.12",
+    "angular-route": "~1.2.12",
+    "angular-mocks": "~1.2.12"
+  }
+}

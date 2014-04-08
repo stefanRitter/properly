@@ -1,0 +1,24 @@
+.header-spacer
+
+form.form.center(name="signinForm")
+  h2.margin.margin-top-big.italic Sing in to Properly
+  
+  .form-group
+    label Email*
+    input(name="email", type="email", placeholder="Email", ng-model="email", required)
+  
+  .form-group
+    label Password*
+    input(name="password", type="password", placeholder="Password", ng-model="password", required)
+
+  .form-group
+    button.button-red.medium(ng-click="signin()") Sign in
+    br
+    span.required * required
+
+  .form-group
+    .error {{notifier.error}}
+    .notice {{notifier.notice}}
+
+  .margin-big
+    a.underline(href="/join") New user? Sign up here.

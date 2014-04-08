@@ -1,0 +1,39 @@
+angular.module('app', ['ngResource', 'ngRoute']);
+
+angular.module('app').config(function ($routeProvider, $locationProvider) {
+  'use strict';
+
+  var routeRoleChecks = {
+    user: {
+      auth: function (appAuth) {
+        return appAuth.authorizeLoggedInUserForRoute();
+      }
+    }
+  };
+
+  $locationProvider.html5Mode(true);
+
+  $routeProvider
+    .when('/',        {templateUrl: '/partials/pages/home',     controller: 'appHomeCtrl'})
+    .when('/login',   {templateUrl: '/partials/account/login',  controller: 'appLoginCtrl'})
+    .when('/join',    {templateUrl: '/partials/account/join',   controller: 'appJoinCtrl'})
+    .when('/map',     {templateUrl: '/partials/map/map',        controller: 'appMapCtrl'})
+    .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'});
+  
+  $routeProvider
+    .when('/account/saved', {templateUrl: '/partials/saved/saved',
+      controller: 'appSavedCtrl', resolve: routeRoleChecks.user})
+    .when('/account/settings', {templateUrl: '/partials/account/settings',
+      controller: 'appSettingsCtrl', resolve: routeRoleChecks.user});
+});
+
+
+angular.module('app').run(function ($rootScope, $location) {
+  'use strict';
+
+  $rootScope.$on('$routeChangeError', function (event, current, previous, rejectionReason) {
+    if (rejectionReason === 'not authorized') {
+      $location.path('/');
+    }
+  });
+});
