@@ -1,1 +1,1 @@
-web: node --stack-size=32000 server.js
+web: node server.js
