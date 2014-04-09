@@ -1,3 +1,5 @@
 header.header(ng-controller="appHeaderCtrl")
-  a.button-red(href="/join") Join
-  a.button-gray(href="/login") Log in
+  .header-logged-out.pull-right.margin-sm
+    a.header-pro-link(href="/pro") Rental owner?
+    a.button-red.margin-right-sm(href="/join") Join
+    a.button-gray(href="/login") Log in

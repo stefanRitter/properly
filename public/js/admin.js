@@ -391,15 +391,15 @@ angular.module('app').run(function ($rootScope, $location) {
   
   $scope.header = {};
 });
-;angular.module('app').controller('appMapCtrl', function ($scope) {
-  'use strict';
-
-  $scope.map = {};
-});
 ;angular.module('app').controller('appHomeCtrl', function ($scope, appIdentity) {
   'use strict';
 
   $scope.identity = appIdentity;
+});
+;angular.module('app').controller('appMapCtrl', function ($scope) {
+  'use strict';
+
+  $scope.map = {};
 });
 ;angular.module('app').controller('appProCtrl', function ($scope) {
   'use strict';
