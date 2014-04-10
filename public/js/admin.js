@@ -402,11 +402,11 @@ angular.module('app').run(function ($rootScope, $location) {
 
   $scope.map = {};
 
-  var myLatlng = new google.maps.LatLng(53.068165,-4.076803); // Add the coordinates
+  var myLatlng = new google.maps.LatLng(51.5096283,-0.1114692); // Add the coordinates
   var mapOptions = {
-    zoom: 8, // The initial zoom level when your map loads (0-20)
-    minZoom: 6, // Minimum zoom level allowed (0-20)
-    maxZoom: 17, // Maximum soom level allowed (0-20)
+    zoom: 13, // The initial zoom level when your map loads (0-20)
+    minZoom: 13, // Minimum zoom level allowed (0-20)
+    maxZoom: 20, // Maximum soom level allowed (0-20)
     zoomControl:true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
     zoomControlOptions: {
       style:google.maps.ZoomControlStyle.DEFAULT // Change to SMALL to force just the + and - buttons.
