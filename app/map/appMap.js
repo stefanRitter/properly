@@ -1,6 +1,6 @@
 angular.module('app').value('appGoogle', window.google);
 
-angular.module('app').factory('appMap', function (appGoogle) {
+angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   'use strict';
   var google = appGoogle,
       map = {},
@@ -21,7 +21,7 @@ angular.module('app').factory('appMap', function (appGoogle) {
       },
       center: latLang,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false, // Disable Mouse Scroll zooming (Essential for responsive sites!)
+      scrollwheel: !appIsMobile, // Disable Mouse Scroll zooming on mobile
      
       // All of the below are set to true by default, so simply remove if set to true:
       panControl: false, // Set to false to disable

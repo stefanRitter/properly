@@ -19,5 +19,5 @@ angular.module('app').factory('appIsMobile', function() {
     }
   };
   
-  return isMobile;
+  return isMobile.any();
 });
