@@ -386,10 +386,12 @@ angular.module('app').run(function ($rootScope, $location) {
   
   return header;
 });
-;angular.module('app').controller('appHeaderCtrl', function ($scope) {
+;angular.module('app').controller('appHeaderCtrl', function ($scope, $location) {
   'use strict';
   
-  $scope.header = {};
+  $scope.onPath = function(url) {
+    return url === $location.path();
+  };
 });
 ;angular.module('app').controller('appHomeCtrl', function ($scope, appIdentity) {
   'use strict';
