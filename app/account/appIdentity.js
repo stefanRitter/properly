@@ -17,7 +17,8 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
       return !!this.currentUser;
     },
     isAuthorized: function(role) {
-      return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+      return !!this.currentUser &&
+        (this.currentUser.roles.indexOf(role) > -1 || this.currentUser.roles.indexOf('admin') > -1);
     }
   };
 });

@@ -212,7 +212,8 @@ angular.module('app').run(function ($rootScope, $location) {
       return !!this.currentUser;
     },
     isAuthorized: function(role) {
-      return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+      return !!this.currentUser &&
+        (this.currentUser.roles.indexOf(role) > -1 || this.currentUser.roles.indexOf('admin') > -1);
     }
   };
 });
@@ -482,7 +483,7 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
 
   $scope.identity = {};
 });
-;angular.module('app').controller('appSavedCtrl', function ($scope, appFeedback, appHeader, appIdentity) {
+;angular.module('app').controller('appSavedCtrl', function ($scope, appFeedback, appIdentity) {
   'use strict';
 
   $scope.readlater = appIdentity.currentUser.readlater || [];
@@ -491,7 +492,6 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   };
 
   $scope.toggleFeedback = function() { appFeedback.toggle(); };
-  $scope.toggleHeader = function() { appHeader.toggle(); };
 
   $scope.removeLink = function(url) {
     appIdentity.currentUser.removeSavedLink(url);

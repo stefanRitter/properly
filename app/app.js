@@ -22,9 +22,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'});
   
   $routeProvider
-    .when('/account/saved', {templateUrl: '/partials/saved/saved',
+    .when('/saved', {templateUrl: '/partials/saved/saved',
       controller: 'appSavedCtrl', resolve: routeRoleChecks.user})
-    .when('/account/settings', {templateUrl: '/partials/account/settings',
+    .when('/settings', {templateUrl: '/partials/account/settings',
       controller: 'appSettingsCtrl', resolve: routeRoleChecks.user});
 });
 

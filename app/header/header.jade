@@ -9,8 +9,8 @@ header.header(ng-controller="appHeaderCtrl")
     a.button-gray.header-pro-link(href="/pro") Rental owner?
 
   .header-logged-in.ng-hide(ng-show="isLoggedIn('verified')")
-    a.button-red(href="/favourites") &star; Saved
-    a.button-red(href="/favourites") Account
+    a.button-gray(href="/saved") &star; Saved
+    a.button-lightgray.margin-left-sm(href="/settings") Your Account
     // a(href="", ng-click="signout()") Sign Out
 
   .header-logged-in-pro.ng-hide(ng-show="onPath('/pro')")

@@ -14,13 +14,8 @@ module.exports = function (app) {
   app.get('/',        pages('index'));
   app.get('/map',     pages('map'));
   app.get('/pro',     pages('pro'));
-  app.get('/login',   pages('main'));
-  app.get('/join',    pages('main'));
-  app.get('/verify',  pages('main'));
+  app.get('/:id',     auth.authorize, pages('main'));
 
-  app.get('/account/saved', pages('main'));
-  app.get('/account/settings',  pages('main'));
-  
   // VIEW PARTIALS
   app.get('/partials/*', function (req, res) {
     res.render('../../app/' + req.params);
@@ -32,8 +27,8 @@ module.exports = function (app) {
   app.post('/api/feedback',    feedback.createFeedback);
 
   // AUTH
-  app.post('/login',                  auth.authenticateLocal);
-  app.post('/logout',                 auth.logout);
+  app.post('/login',            auth.authenticateLocal);
+  app.post('/logout',           auth.logout);
 
   // ADMIN
   app.get('/admin/*',        auth.requiresRole('admin'), admin.get);

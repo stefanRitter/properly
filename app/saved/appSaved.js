@@ -1,4 +1,4 @@
-angular.module('app').controller('appSavedCtrl', function ($scope, appFeedback, appHeader, appIdentity) {
+angular.module('app').controller('appSavedCtrl', function ($scope, appFeedback, appIdentity) {
   'use strict';
 
   $scope.readlater = appIdentity.currentUser.readlater || [];
@@ -7,7 +7,6 @@ angular.module('app').controller('appSavedCtrl', function ($scope, appFeedback, 
   };
 
   $scope.toggleFeedback = function() { appFeedback.toggle(); };
-  $scope.toggleHeader = function() { appHeader.toggle(); };
 
   $scope.removeLink = function(url) {
     appIdentity.currentUser.removeSavedLink(url);
