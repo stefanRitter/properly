@@ -20,6 +20,10 @@ exports.createUser = function (req, res, next) {
   userBody.salt = encrypt.createSalt();
   userBody.password = encrypt.hashPwd(userBody.salt, userBody.password);
 
+  if (!!userBody.roles) {
+    userBody.roles = ['pro'];
+  }
+
   User.create(userBody, function (err, user) {
     if (err) {
       if (err.toString().indexOf('E11000') > -1) {

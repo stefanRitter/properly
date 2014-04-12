@@ -28,3 +28,4 @@ header.header(ng-controller="appHeaderCtrl")
     a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
       | Dashboard
       .arrow-down-black.margin-left
+    a.button-lightgray(href="", ng-click="signout()", ng-show="onPath('/pro/dashboard')") Logout
