@@ -5,9 +5,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
   var routeRoleChecks = {
     user: {
-      auth: function (appAuth) {
+      auth: ['appAuth', function (appAuth) {
         return appAuth.authorizeLoggedInUserForRoute();
-      }
+      }]
     }
   };
 
@@ -19,15 +19,13 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/join',    {templateUrl: '/partials/account/join',   controller: 'appJoinCtrl'})
     .when('/verify',  {templateUrl: '/partials/account/verify', controller: 'appVerifyCtrl'})
     .when('/map',     {templateUrl: '/partials/map/map',        controller: 'appMapCtrl'})
-    .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'});
-  
-  $routeProvider
+    .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'})
+
     .when('/saved', {templateUrl: '/partials/saved/saved',
       controller: 'appSavedCtrl', resolve: routeRoleChecks.user})
     .when('/settings', {templateUrl: '/partials/account/settings',
       controller: 'appSettingsCtrl', resolve: routeRoleChecks.user});
 });
-
 
 angular.module('app').run(function ($rootScope, $location) {
   'use strict';
