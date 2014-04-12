@@ -430,7 +430,7 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   function init() {
     var mapOptions = {
       zoom: 13,
-      minZoom: 13,
+      minZoom: 12,
       maxZoom: 20,
       zoomControl: true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
       zoomControlOptions: {
