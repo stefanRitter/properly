@@ -64,28 +64,28 @@ User = mongoose.model('User', userSchema);
 // seed users
 exports.createDefaultUsers = function() {
   User.find({}).exec(function(err, collection) {
-    if (collection.length === 0) {}
-    var salt = encrypt.createSalt();
-    var pwd = encrypt.hashPwd(salt, 'Buzzr2014');
-    
-    User.findOneAndUpdate({email: 'unverified@properly.io'}, {email: 'unverified@properly.io',
-      name: 'unverified', salt: salt, password: pwd, roles: []},
-      {upsert: true}, function(err) {
-      if (err) { throw err; }
-    });
-    User.findOneAndUpdate({email: 'verified@properly.io'}, {email: 'verified@properly.io',
-      name: 'Verified', salt: salt, password: pwd, roles: ['verified']},
-      {upsert: true}, function(err) {
-      if (err) { throw err; }
-    });
-    User.findOneAndUpdate({email: 'owner@properly.io'}, { email: 'owner@properly.io', salt: salt,
-      name: 'Owner', password: pwd, roles: ['pro']}, {upsert: true}, function(err) {
-      if (err) { throw err; }
-    });
-    User.findOneAndUpdate({email: 'admin@properly.io'}, { email: 'admin@properly.io', salt: salt,
-      name: 'Admin', password: pwd, roles: ['admin']}, {upsert: true}, function(err) {
-      if (err) { throw err; }
-    });
-    //}
+    if (collection.length === 0) {
+      var salt = encrypt.createSalt();
+      var pwd = encrypt.hashPwd(salt, 'Buzzr2014');
+      
+      User.findOneAndUpdate({email: 'unverified@properly.io'}, {email: 'unverified@properly.io',
+        name: 'unverified', salt: salt, password: pwd, roles: []},
+        {upsert: true}, function(err) {
+        if (err) { throw err; }
+      });
+      User.findOneAndUpdate({email: 'verified@properly.io'}, {email: 'verified@properly.io',
+        name: 'Verified', salt: salt, password: pwd, roles: ['verified']},
+        {upsert: true}, function(err) {
+        if (err) { throw err; }
+      });
+      User.findOneAndUpdate({email: 'owner@properly.io'}, { email: 'owner@properly.io', salt: salt,
+        name: 'Owner', password: pwd, roles: ['pro']}, {upsert: true}, function(err) {
+        if (err) { throw err; }
+      });
+      User.findOneAndUpdate({email: 'admin@properly.io'}, { email: 'admin@properly.io', salt: salt,
+        name: 'Admin', password: pwd, roles: ['admin']}, {upsert: true}, function(err) {
+        if (err) { throw err; }
+      });
+    }
   });
 };
