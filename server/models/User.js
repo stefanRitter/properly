@@ -68,20 +68,28 @@ exports.createDefaultUsers = function() {
       var salt = encrypt.createSalt();
       var pwd = encrypt.hashPwd(salt, 'Buzzr2014');
       
-      User.findOneAndUpdate({email: 'stefan@buzzr.io'}, {email: 'stefan@buzzr.io',
-        name: 'Stefan', salt: salt, password: pwd, roles: ['admin']},
+      User.findOneAndUpdate({email: 'verified@properly.io'}, {email: 'verified@properly.io',
+        name: 'Verified', salt: salt, password: pwd, roles: ['verified']},
         {upsert: true}, function(err) {
         if (err) { throw err; }
       });
-      User.findOneAndUpdate({email: 'jeroen@buzzr.io'}, { email: 'jeroen@buzzr.io', salt: salt,
-        password: pwd, roles: ['admin']}, {upsert: true}, function(err) {
+      User.findOneAndUpdate({email: 'owner@properly.io'}, { email: 'owner@properly.io', salt: salt,
+        name: 'Owner', password: pwd, roles: ['owner']}, {upsert: true}, function(err) {
+        if (err) { throw err; }
+      });
+      User.findOneAndUpdate({email: 'admin@properly.io'}, { email: 'admin@properly.io', salt: salt,
+        name: 'Admin', password: pwd, roles: ['admin']}, {upsert: true}, function(err) {
         if (err) { throw err; }
       });
     } else {
-      /*User.findOne({email: 'stef@stef.com'}, function(err, obj) {
+      User.findOne({email: 'stefan@buzzr.io'}, function(err, obj) {
         if (err) { throw err; }
         obj.remove();
-      });*/
+      });
+      User.findOne({email: 'jeroen@buzzr.io'}, function(err, obj) {
+        if (err) { throw err; }
+        obj.remove();
+      });
     }
   });
 };
