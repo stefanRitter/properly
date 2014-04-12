@@ -13,7 +13,7 @@ header.header(ng-controller="appHeaderCtrl")
   .header-logged-in.ng-hide(ng-show="isLoggedIn('verified')")
     a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
     .header-dropdown-toggle(ng-click="toggleDropdown()")
-      | {{user.name}}
+      | {{getUserName()}}
       .arrow-down-black.margin-left
 
     .header-dropdown(ng-class="{'show': openDropdown}")

@@ -204,11 +204,11 @@ angular.module('app').run(function ($rootScope, $location) {
     },
     
     isAuthorized: function(role) {
-      return !!this.currentUser && this.checkRole(role);
+      return !!this.currentUser && this.hasRole(role);
     },
     
-    checkRole: function(role) {
-      return this.currentUser.roles.indexOf('admin') > -1 || this.currentUser.roles.indexOf(role) > -1;
+    hasRole: function(role) {
+      return this.currentUser.isAdmin() || this.currentUser.roles.indexOf(role) > -1;
     }
   };
 
@@ -218,7 +218,7 @@ angular.module('app').run(function ($rootScope, $location) {
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
 
-    if (!appIdentity.checkRole('verified')) {
+    if (!appIdentity.hasRole('verified') && !appIdentity.hasRole('pro')) {
       $location.path('/verify');
     }
   }
@@ -241,7 +241,7 @@ angular.module('app').run(function ($rootScope, $location) {
     });
   };
 });
-;angular.module('app').controller('appLoginCtrl', function ($scope, $location, appAuth, appNotifier) {
+;angular.module('app').controller('appLoginCtrl', function ($scope, $location, appAuth, appNotifier, appIdentity) {
   'use strict';
 
   $scope.signin = function() {
@@ -249,7 +249,11 @@ angular.module('app').run(function ($rootScope, $location) {
       .authenticateUser($scope.email, $scope.password)
       .then(function(success) {
         if (success) {
-          $location.path('/map');
+          if (appIdentity.hasRole('pro')) {
+            $location.path('/pro/dashboard');
+          } else {
+            $location.path('/map');
+          }
         } else {
           appNotifier.error('email/password combination incorrect', $scope);
         }
@@ -391,7 +395,9 @@ angular.module('app').run(function ($rootScope, $location) {
 ;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
 
-  $scope.user = appIdentity.currentUser;
+  $scope.getUserName = function() {
+    return appIdentity.currentUser.name;
+  };
   
   $scope.onPath = function() {
     for (var i = 0, len = arguments.length; i < len; i++) {
@@ -416,8 +422,12 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.openDropdown = !$scope.openDropdown;
   };
 });
-;angular.module('app').controller('appHomeCtrl', function () {
+;angular.module('app').controller('appHomeCtrl', function ($scope, $location, $anchorScroll) {
   'use strict';
+  $anchorScroll();
+  $scope.gotoAbout = function() {
+    $location.hash('about');
+  };
 });
 ;angular.module('app').value('appGoogle', window.google);
 
@@ -496,10 +506,14 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
 
   $scope.identity = {};
 });
-;angular.module('app').controller('appProDashboardCtrl', function ($scope) {
+;angular.module('app').controller('appProDashboardCtrl', function ($scope, $location, appAuth) {
   'use strict';
 
-  $scope.identity = {};
+  $scope.signout = function() {
+    appAuth.logoutUser().then(function() {
+      $location.path('/');
+    });
+  };
 });
 ;angular.module('app').controller('appProfileEditCtrl', function ($scope) {
   'use strict';

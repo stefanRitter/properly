@@ -9,11 +9,11 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
     },
     
     isAuthorized: function(role) {
-      return !!this.currentUser && this.checkRole(role);
+      return !!this.currentUser && this.hasRole(role);
     },
     
-    checkRole: function(role) {
-      return this.currentUser.roles.indexOf('admin') > -1 || this.currentUser.roles.indexOf(role) > -1;
+    hasRole: function(role) {
+      return this.currentUser.isAdmin() || this.currentUser.roles.indexOf(role) > -1;
     }
   };
 
@@ -23,7 +23,7 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
 
-    if (!appIdentity.checkRole('verified')) {
+    if (!appIdentity.hasRole('verified') && !appIdentity.hasRole('pro')) {
       $location.path('/verify');
     }
   }
