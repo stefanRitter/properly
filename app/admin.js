@@ -5,9 +5,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
   var routeRoleChecks = {
     admin: {
-      auth: function (appAuth) {
+      auth: ['appAuth', function (appAuth) {
         return appAuth.authorizeCurrentUserForRoute('admin');
-      }
+      }]
     }
   };
 

@@ -61,8 +61,8 @@ angular.module('app').factory('appAuth', function ($http, $q, appIdentity, AppUs
       return dfd.promise;
     },
 
-    authorizeCurrentUserForRoute: function() {
-      if (appIdentity.isAuthorized('admin')) {
+    authorizeCurrentUserForRoute: function(role) {
+      if (appIdentity.isAuthorized(role)) {
         return true;
       }
       return $q.reject('not authorized');

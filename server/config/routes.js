@@ -15,6 +15,9 @@ module.exports = function (app) {
   app.get('/map',     pages('map'));
   app.get('/pro',     pages('pro'));
   app.get('/:id',     auth.authorize, pages('main'));
+  
+  app.get('/home/:id', pages('main'));
+  app.get('/home/:id/edit', auth.requiresRole('pro'), pages('main'));
 
   // VIEW PARTIALS
   app.get('/partials/*', function (req, res) {

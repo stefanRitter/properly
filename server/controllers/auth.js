@@ -20,7 +20,7 @@ exports.authenticateLocal = function(req, res, next) {
 
 exports.requiresRole = function(role) {
   return function(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) { return next(); }
+    if (req.isAuthenticated() && req.user.hasRole(role)) { return next(); }
     res.status(403).json({reason:'not authorized'});
   };
 };

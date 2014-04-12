@@ -52,7 +52,7 @@ userSchema.methods.recordLogin = function() {
 };
 
 userSchema.methods.hasRole = function(role) {
-  return this.roles.indexOf(role) > -1;
+  return this.roles.indexOf(role) > -1 || this.roles.indexOf('admin') > -1;
 };
 
 userSchema.methods.authenticated = function(passwordToMatch) {

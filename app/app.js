@@ -20,6 +20,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/verify',  {templateUrl: '/partials/account/verify', controller: 'appVerifyCtrl'})
     .when('/map',     {templateUrl: '/partials/map/map',        controller: 'appMapCtrl'})
     .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'})
+    
+    .when('/home/:id',  {templateUrl: '/partials/property/show',      controller: 'appPropertyShowCtrl'})
+    .when('/home/:id/edit',  {templateUrl: '/partials/property/edit', controller: 'appPropertyEditCtrl'})
 
     .when('/saved', {templateUrl: '/partials/saved/saved',
       controller: 'appSavedCtrl', resolve: routeRoleChecks.user})

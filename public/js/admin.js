@@ -5,9 +5,9 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
   var routeRoleChecks = {
     admin: {
-      auth: function (appAuth) {
+      auth: ['appAuth', function (appAuth) {
         return appAuth.authorizeCurrentUserForRoute('admin');
-      }
+      }]
     }
   };
 
@@ -179,8 +179,8 @@ angular.module('app').run(function ($rootScope, $location) {
       return dfd.promise;
     },
 
-    authorizeCurrentUserForRoute: function() {
-      if (appIdentity.isAuthorized('admin')) {
+    authorizeCurrentUserForRoute: function(role) {
+      if (appIdentity.isAuthorized(role)) {
         return true;
       }
       return $q.reject('not authorized');
@@ -197,11 +197,15 @@ angular.module('app').run(function ($rootScope, $location) {
   'use strict';
 
   var currentUser;
+
+  function checkRole(role) {
+    return currentUser.roles.indexOf('admin') > -1 || currentUser.roles.indexOf(role) > -1;
+  }
   
   if (!!$window.bootstrappedUser) {
     currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
-    if (!currentUser.verified) {
+    if (!checkRole('verified')) {
       $location.path('/verify');
     }
   }
@@ -212,8 +216,7 @@ angular.module('app').run(function ($rootScope, $location) {
       return !!this.currentUser;
     },
     isAuthorized: function(role) {
-      return !!this.currentUser &&
-        (this.currentUser.roles.indexOf(role) > -1 || this.currentUser.roles.indexOf('admin') > -1);
+      return !!this.currentUser && checkRole(role);
     }
   };
 });
@@ -473,10 +476,24 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   appMap.init();
   appMap.setMarker();
 });
+;angular.module('app').factory('appSearch', function () {
+  'use strict';
+
+});
 ;angular.module('app').controller('appProCtrl', function ($scope) {
   'use strict';
 
   $scope.identity = {};
+});
+;angular.module('app').controller('appPropertyEditCtrl', function ($scope, $routeParams) {
+  'use strict';
+
+  $scope.id = $routeParams.id;
+});
+;angular.module('app').controller('appPropertyShowCtrl', function ($scope, $routeParams) {
+  'use strict';
+
+  $scope.id = $routeParams.id;
 });
 ;angular.module('app').controller('appSavedCtrl', function ($scope) {
   'use strict';

@@ -2,11 +2,15 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
   'use strict';
 
   var currentUser;
+
+  function checkRole(role) {
+    return currentUser.roles.indexOf('admin') > -1 || currentUser.roles.indexOf(role) > -1;
+  }
   
   if (!!$window.bootstrappedUser) {
     currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
-    if (!currentUser.verified) {
+    if (!checkRole('verified')) {
       $location.path('/verify');
     }
   }
@@ -17,8 +21,7 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
       return !!this.currentUser;
     },
     isAuthorized: function(role) {
-      return !!this.currentUser &&
-        (this.currentUser.roles.indexOf(role) > -1 || this.currentUser.roles.indexOf('admin') > -1);
+      return !!this.currentUser && checkRole(role);
     }
   };
 });
