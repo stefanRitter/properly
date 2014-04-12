@@ -1,3 +1,31 @@
 .header-spacer
-.center
+.center.margin-top-big
   h1 Rent Your Home Today With Properly Pro.
+  
+  form.form.margin-top(name="signupForm")
+    .form-group
+      label Email*
+      input(name="email", type="email", placeholder="Email", ng-model="email", required)
+    
+    .form-group
+      label Password*
+      input(name="password", type="password", placeholder="Password", ng-model="password", required)
+    
+    .form-group
+      button.button-red.medium(ng-click="signup()", ng-disabled="signupForm.$invalid") Sign up
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}
+    
+  .padding.center
+    a.underline(href="/login") Have an account? Log in.
+
+.margin-left.margin-top-big.center.padding-top
+  h2 A smarter way to rent out your homes:
+  .inline-block.left
+    h3 - Verified tenants
+    h3 - Beautifully easy to upload, and manage
+    h3 - World class service, we are right here in London
