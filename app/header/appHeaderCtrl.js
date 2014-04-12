@@ -21,4 +21,8 @@ angular.module('app').controller('appHeaderCtrl', function ($scope, $location, a
       $location.path('/');
     });
   };
+
+  $scope.toggleDropdown = function() {
+    $scope.openDropdown = !$scope.openDropdown;
+  };
 });

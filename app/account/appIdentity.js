@@ -2,7 +2,7 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
   'use strict';
 
   var appIdentity = {
-    currentUser: {},
+    currentUser: undefined,
     
     isAuthenticated: function() {
       return !!this.currentUser;
@@ -22,7 +22,7 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
     var currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
-    
+
     if (!appIdentity.checkRole('verified')) {
       $location.path('/verify');
     }

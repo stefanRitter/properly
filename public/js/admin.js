@@ -197,7 +197,7 @@ angular.module('app').run(function ($rootScope, $location) {
   'use strict';
 
   var appIdentity = {
-    currentUser: {},
+    currentUser: undefined,
     
     isAuthenticated: function() {
       return !!this.currentUser;
@@ -217,7 +217,7 @@ angular.module('app').run(function ($rootScope, $location) {
     var currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
-    
+
     if (!appIdentity.checkRole('verified')) {
       $location.path('/verify');
     }
@@ -411,6 +411,10 @@ angular.module('app').run(function ($rootScope, $location) {
       $location.path('/');
     });
   };
+
+  $scope.toggleDropdown = function() {
+    $scope.openDropdown = !$scope.openDropdown;
+  };
 });
 ;angular.module('app').controller('appHomeCtrl', function () {
   'use strict';
@@ -496,6 +500,16 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   'use strict';
 
   $scope.identity = {};
+});
+;angular.module('app').controller('appProfileEditCtrl', function ($scope) {
+  'use strict';
+
+  $scope.id = 0;
+});
+;angular.module('app').controller('appProfileShowCtrl', function ($scope) {
+  'use strict';
+
+  $scope.id = 0;
 });
 ;angular.module('app').controller('appPropertyEditCtrl', function ($scope, $routeParams) {
   'use strict';

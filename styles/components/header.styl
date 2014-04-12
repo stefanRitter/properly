@@ -33,3 +33,24 @@
     .button-red
     .button-gray
       padding 0.5em 1em
+
+.header-dropdown-toggle
+  @extend .button-lightgray
+  margin 0 2em 0 0.3em
+  display inline-block
+  min-width 81px
+
+.header-dropdown
+  margin-left 120px
+  width 135px
+  background-color LightGray
+  overflow hidden
+  height 0
+  transition height 0.2s
+  border-bottom-right-radius 8px
+  border-bottom-left-radius 8px
+  a
+    display inline-block
+    margin 10px 15px
+  &.show
+    height 130px
