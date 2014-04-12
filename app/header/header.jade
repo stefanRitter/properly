@@ -1,8 +1,9 @@
 header.header(ng-controller="appHeaderCtrl")
-  a(href="/")
+  a.ng-hide(href="/", ng-hide="onPath('/')")
     .header-logo
       img(src="/img/logo.png", alt="properly")
-  
+
+
   .header-logged-out.ng-hide(ng-hide="onPath('/pro') || isLoggedIn()")
     a.button-red(href="/join", ng-hide="onPath('/join')") Join
     a.button-gray.margin-left-sm(href="/login", ng-hide="onPath('/login')") Log in
@@ -16,7 +17,7 @@ header.header(ng-controller="appHeaderCtrl")
       .arrow-down-black.margin-left
 
     .header-dropdown(ng-class="{'show': openDropdown}")
-      a(href="/account/settings") Your Profile
+      a(href="/account/profile") Your Profile
       br
       a(href="/account/settings") Settings
       br
@@ -24,6 +25,6 @@ header.header(ng-controller="appHeaderCtrl")
 
 
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
-    a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard")
+    a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
       | Dashboard
       .arrow-down-black.margin-left
