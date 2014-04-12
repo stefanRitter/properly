@@ -2,12 +2,11 @@ angular.module('app').controller('appLoginCtrl', function ($scope, $location, ap
   'use strict';
 
   $scope.signin = function() {
-    
     appAuth
       .authenticateUser($scope.email, $scope.password)
       .then(function(success) {
         if (success) {
-          $location.path('/');
+          $location.path('/map');
         } else {
           appNotifier.error('email/password combination incorrect', $scope);
         }

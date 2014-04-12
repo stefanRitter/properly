@@ -1,13 +1,17 @@
 header.header(ng-controller="appHeaderCtrl")
+  a(href="/")
+    .header-logo
+      img(src="/img/logo.png", alt="properly")
+  
   .header-logged-out(ng-hide="onPath('/pro') || isLoggedIn()")
     a.button-red(href="/join", ng-hide="onPath('/join')") Join
     a.button-gray.margin-left-sm(href="/login", ng-hide="onPath('/login')") Log in
     a.button-gray.header-pro-link(href="/pro") Rental owner?
 
-  .header-logged-in.ng-hide(ng-show="isLoggedIn('tenant')") 
-    //, ng-hide="onPath('/verify')")
-    a.button-red(href="/favourites") &star;
-    a(href="", ng-click="signout()") Sign Out
+  .header-logged-in.ng-hide(ng-show="isLoggedIn('verified')")
+    a.button-red(href="/favourites") &star; Saved
+    a.button-red(href="/favourites") Account
+    // a(href="", ng-click="signout()") Sign Out
 
   .header-logged-in-pro.ng-hide(ng-show="onPath('/pro')")
     a(href="", ng-click="signout()") Sign Out
