@@ -1,5 +1,3 @@
-angular.module('app').controller('appHomeCtrl', function ($scope, appIdentity) {
+angular.module('app').controller('appHomeCtrl', function () {
   'use strict';
-
-  $scope.identity = appIdentity;
 });

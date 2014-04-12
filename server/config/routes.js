@@ -12,10 +12,11 @@ module.exports = function (app) {
 
   // APP
   app.get('/',        pages('index'));
-  app.get('/login',   pages('login'));
-  app.get('/join',    pages('join'));
   app.get('/map',     pages('map'));
   app.get('/pro',     pages('pro'));
+  app.get('/login',   pages('main'));
+  app.get('/join',    pages('main'));
+  app.get('/verify',  pages('main'));
 
   app.get('/account/saved', pages('main'));
   app.get('/account/settings',  pages('main'));

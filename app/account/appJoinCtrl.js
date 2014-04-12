@@ -8,7 +8,7 @@ angular.module('app').controller('appJoinCtrl', function ($scope, $location, app
     };
 
     appAuth.createUser(newUserData).then(function() {
-      $location.path('/');
+      $location.path('/verify');
     }, function(reason) {
       appNotifier.error(reason, $scope);
     });

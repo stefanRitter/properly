@@ -14,9 +14,10 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
   $routeProvider
-    .when('/',        {templateUrl: '/partials/home/home',     controller: 'appHomeCtrl'})
+    .when('/',        {templateUrl: '/partials/home/home',      controller: 'appHomeCtrl'})
     .when('/login',   {templateUrl: '/partials/account/login',  controller: 'appLoginCtrl'})
     .when('/join',    {templateUrl: '/partials/account/join',   controller: 'appJoinCtrl'})
+    .when('/verify',  {templateUrl: '/partials/account/verify', controller: 'appVerifyCtrl'})
     .when('/map',     {templateUrl: '/partials/map/map',        controller: 'appMapCtrl'})
     .when('/pro',     {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'});
   

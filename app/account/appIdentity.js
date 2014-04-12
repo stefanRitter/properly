@@ -1,4 +1,4 @@
-angular.module('app').factory('appIdentity', function ($window, AppUser) {
+angular.module('app').factory('appIdentity', function ($window, $location, AppUser) {
   'use strict';
 
   var currentUser;
@@ -6,6 +6,9 @@ angular.module('app').factory('appIdentity', function ($window, AppUser) {
   if (!!$window.bootstrappedUser) {
     currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
+    if (!currentUser.verified) {
+      $location.path('/verify');
+    }
   }
 
   return {

@@ -193,7 +193,7 @@ angular.module('app').run(function ($rootScope, $location) {
       return $q.reject('not authorized');
     }
   };
-});;angular.module('app').factory('appIdentity', function ($window, AppUser) {
+});;angular.module('app').factory('appIdentity', function ($window, $location, AppUser) {
   'use strict';
 
   var currentUser;
@@ -201,6 +201,9 @@ angular.module('app').run(function ($rootScope, $location) {
   if (!!$window.bootstrappedUser) {
     currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
+    if (!currentUser.verified) {
+      $location.path('/verify');
+    }
   }
 
   return {
@@ -223,7 +226,7 @@ angular.module('app').run(function ($rootScope, $location) {
     };
 
     appAuth.createUser(newUserData).then(function() {
-      $location.path('/');
+      $location.path('/verify');
     }, function(reason) {
       appNotifier.error(reason, $scope);
     });
@@ -267,6 +270,13 @@ angular.module('app').run(function ($rootScope, $location) {
     });
   };
 });
+;angular.module('app').controller('appVerifyCtrl', function ($scope) {
+  'use strict';
+
+  $scope.verify = function() {
+    window.alert();
+  };
+});
 ;angular.module('app').controller('appAdminUsersCtrl', function ($scope, AppUser) {
   'use strict';
   
@@ -292,7 +302,7 @@ angular.module('app').run(function ($rootScope, $location) {
     }
   };
   
-  return isMobile.any();
+  return isMobile;
 });
 ;angular.module('app').factory('appNotifier', function() {
   'use strict';
@@ -375,28 +385,30 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.toggle();
   });
 });
-;angular.module('app').factory('appHeader', function ($rootScope) {
-  'use strict';
-
-  var header = {};
-
-  header.toggle = function() {
-    $rootScope.$broadcast('toggleHeader');
-  };
-  
-  return header;
-});
-;angular.module('app').controller('appHeaderCtrl', function ($scope, $location) {
+;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
   
-  $scope.onPath = function(url) {
-    return url === $location.path();
+  $scope.onPath = function() {
+    for (var i = 0, len = arguments.length; i < len; i++) {
+      if (arguments[i] === $location.path()) {
+        return true;
+      }
+    }
+  };
+
+  $scope.isLoggedIn = function(role) {
+    if (role) { return appIdentity.isAuthorized(role); }
+    return appIdentity.isAuthenticated();
+  };
+
+  $scope.signout = function() {
+    appAuth.logoutUser().then(function() {
+      $location.path('/');
+    });
   };
 });
-;angular.module('app').controller('appHomeCtrl', function ($scope, appIdentity) {
+;angular.module('app').controller('appHomeCtrl', function () {
   'use strict';
-
-  $scope.identity = appIdentity;
 });
 ;angular.module('app').value('appGoogle', window.google);
 
@@ -421,7 +433,7 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
       },
       center: latLang,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: !appIsMobile, // Disable Mouse Scroll zooming on mobile
+      scrollwheel: !appIsMobile.any(), // Disable Mouse Scroll zooming on mobile
      
       // All of the below are set to true by default, so simply remove if set to true:
       panControl: false, // Set to false to disable
