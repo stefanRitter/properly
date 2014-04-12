@@ -11,13 +11,18 @@ module.exports = function (app) {
   /*jshint maxstatements: false */
 
   // APP
-  app.get('/',        pages('index'));
-  app.get('/map',     pages('map'));
-  app.get('/pro',     pages('pro'));
-  app.get('/:id',     pages('main'));
-  
-  app.get('/home/:id', pages('main'));
-  app.get('/home/:id/edit', auth.requiresRole('pro'), pages('main'));
+  app.get('/',          pages('index'));
+  app.get('/map',       pages('map'));
+  app.get('/pro',       pages('pro'));
+  app.get('/saved',     pages('main'));
+  app.get('/login',     pages('main'));
+  app.get('/join',      pages('main'));
+  app.get('/home/:id',  pages('main'));
+
+  app.get('/verify',    pages('main'));
+  app.get('/pro/*',     pages('main'));
+  app.get('/account/*', pages('main'));
+
 
   // VIEW PARTIALS
   app.get('/partials/*', function (req, res) {

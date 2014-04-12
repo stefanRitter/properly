@@ -4,11 +4,12 @@ angular.module('app').controller('appProCtrl', function ($scope, $location, appA
   $scope.signup = function() {
     var newUserData = {
       email: $scope.email,
-      password: $scope.password
+      password: $scope.password,
+      roles: ['pro']
     };
 
     appAuth.createUser(newUserData).then(function() {
-      $location.path('/verify');
+      $location.path('/pro/dashboard');
     }, function(reason) {
       appNotifier.error(reason, $scope);
     });
