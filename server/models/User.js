@@ -81,15 +81,6 @@ exports.createDefaultUsers = function() {
         name: 'Admin', password: pwd, roles: ['admin']}, {upsert: true}, function(err) {
         if (err) { throw err; }
       });
-    } else {
-      User.findOne({email: 'stefan@buzzr.io'}, function(err, obj) {
-        if (err) { throw err; }
-        obj.remove();
-      });
-      User.findOne({email: 'jeroen@buzzr.io'}, function(err, obj) {
-        if (err) { throw err; }
-        obj.remove();
-      });
     }
   });
 };
