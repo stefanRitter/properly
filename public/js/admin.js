@@ -116,6 +116,9 @@ angular.module('app').run(function ($rootScope, $location) {
 
   return UserResource;
 });
+;angular.module('app').controller('appAccountCtrl', function () {
+  'use strict';
+});
 ;angular.module('app').factory('appAuth', function ($http, $q, appIdentity, AppUser) {
   'use strict';
 
@@ -385,6 +388,8 @@ angular.module('app').run(function ($rootScope, $location) {
 });
 ;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
+
+  $scope.user = appIdentity.currentUser;
   
   $scope.onPath = function() {
     for (var i = 0, len = arguments.length; i < len; i++) {

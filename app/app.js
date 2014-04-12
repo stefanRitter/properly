@@ -24,10 +24,12 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/home/:id',  {templateUrl: '/partials/property/show',      controller: 'appPropertyShowCtrl'})
     .when('/home/:id/edit',  {templateUrl: '/partials/property/edit', controller: 'appPropertyEditCtrl'})
 
-    .when('/saved', {templateUrl: '/partials/saved/saved',
-      controller: 'appSavedCtrl', resolve: routeRoleChecks.user})
-    .when('/settings', {templateUrl: '/partials/account/settings',
-      controller: 'appSettingsCtrl', resolve: routeRoleChecks.user});
+    .when('/saved', {templateUrl: '/partials/saved/saved', controller: 'appSavedCtrl',
+      resolve: routeRoleChecks.user})
+    .when('/account', {templateUrl: '/partials/account/account', controller: 'appAccountCtrl',
+      resolve: routeRoleChecks.user})
+    .when('/account/settings', {templateUrl: '/partials/account/settings', controller: 'appSettingsCtrl',
+      resolve: routeRoleChecks.user});
 });
 
 angular.module('app').run(function ($rootScope, $location) {

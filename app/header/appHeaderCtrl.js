@@ -1,5 +1,7 @@
 angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
+
+  $scope.user = appIdentity.currentUser;
   
   $scope.onPath = function() {
     for (var i = 0, len = arguments.length; i < len; i++) {
