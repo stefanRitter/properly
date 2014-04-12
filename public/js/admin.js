@@ -116,8 +116,14 @@ angular.module('app').run(function ($rootScope, $location) {
 
   return UserResource;
 });
-;angular.module('app').controller('appAccountCtrl', function () {
+;angular.module('app').controller('appAccountCtrl', function ($scope, $location, appAuth) {
   'use strict';
+
+  $scope.signout = function() {
+    appAuth.logoutUser().then(function() {
+      $location.path('/');
+    });
+  };
 });
 ;angular.module('app').factory('appAuth', function ($http, $q, appIdentity, AppUser) {
   'use strict';
@@ -386,7 +392,7 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.toggle();
   });
 });
-;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
+;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity) {
   'use strict';
 
   $scope.user = appIdentity.currentUser;
@@ -402,12 +408,6 @@ angular.module('app').run(function ($rootScope, $location) {
   $scope.isLoggedIn = function(role) {
     if (role) { return appIdentity.isAuthorized(role); }
     return appIdentity.isAuthenticated();
-  };
-
-  $scope.signout = function() {
-    appAuth.logoutUser().then(function() {
-      $location.path('/');
-    });
   };
 });
 ;angular.module('app').controller('appHomeCtrl', function () {
@@ -486,6 +486,11 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
 
 });
 ;angular.module('app').controller('appProCtrl', function ($scope) {
+  'use strict';
+
+  $scope.identity = {};
+});
+;angular.module('app').controller('appProDashboardCtrl', function ($scope) {
   'use strict';
 
   $scope.identity = {};

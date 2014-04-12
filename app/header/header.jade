@@ -14,5 +14,7 @@ header.header(ng-controller="appHeaderCtrl")
       | {{user.name}}
       .arrow-down-black.margin-left
 
-  .header-logged-in-pro.ng-hide(ng-show="onPath('/pro')")
-    a(href="", ng-click="signout()") Sign Out
+  .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
+    a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard")
+      | {{user.name}}
+      .arrow-down-black.margin-left
