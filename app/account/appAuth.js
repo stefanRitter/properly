@@ -1,4 +1,4 @@
-angular.module('app').factory('appAuth', function ($http, $q, appIdentity, AppUser) {
+angular.module('app').factory('appAuth', function ($http, $q, $rootScope, appIdentity, AppUser) {
   'use strict';
 
   return {

@@ -28,8 +28,6 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
     .when('/saved', {templateUrl: '/partials/saved/saved', controller: 'appSavedCtrl',
       resolve: routeRoleChecks.user})
-    .when('/account', {templateUrl: '/partials/account/account', controller: 'appAccountCtrl',
-      resolve: routeRoleChecks.user})
     .when('/account/settings', {templateUrl: '/partials/account/settings', controller: 'appSettingsCtrl',
       resolve: routeRoleChecks.user});
 });

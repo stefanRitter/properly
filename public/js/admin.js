@@ -116,16 +116,7 @@ angular.module('app').run(function ($rootScope, $location) {
 
   return UserResource;
 });
-;angular.module('app').controller('appAccountCtrl', function ($scope, $location, appAuth) {
-  'use strict';
-
-  $scope.signout = function() {
-    appAuth.logoutUser().then(function() {
-      $location.path('/');
-    });
-  };
-});
-;angular.module('app').factory('appAuth', function ($http, $q, appIdentity, AppUser) {
+;angular.module('app').factory('appAuth', function ($http, $q, $rootScope, appIdentity, AppUser) {
   'use strict';
 
   return {
@@ -205,29 +196,34 @@ angular.module('app').run(function ($rootScope, $location) {
 });;angular.module('app').factory('appIdentity', function ($window, $location, AppUser) {
   'use strict';
 
-  var currentUser;
+  var appIdentity = {
+    currentUser: {},
+    
+    isAuthenticated: function() {
+      return !!this.currentUser;
+    },
+    
+    isAuthorized: function(role) {
+      return !!this.currentUser && this.checkRole(role);
+    },
+    
+    checkRole: function(role) {
+      return this.currentUser.roles.indexOf('admin') > -1 || this.currentUser.roles.indexOf(role) > -1;
+    }
+  };
 
-  function checkRole(role) {
-    return currentUser.roles.indexOf('admin') > -1 || currentUser.roles.indexOf(role) > -1;
-  }
-  
+
   if (!!$window.bootstrappedUser) {
-    currentUser = new AppUser();
+    var currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
-    if (!checkRole('verified')) {
+    appIdentity.currentUser = currentUser;
+    
+    if (!appIdentity.checkRole('verified')) {
       $location.path('/verify');
     }
   }
 
-  return {
-    currentUser: currentUser,
-    isAuthenticated: function() {
-      return !!this.currentUser;
-    },
-    isAuthorized: function(role) {
-      return !!this.currentUser && checkRole(role);
-    }
-  };
+  return appIdentity;
 });
 ;angular.module('app').controller('appJoinCtrl', function ($scope, $location, appAuth, appNotifier) {
   'use strict';
@@ -392,7 +388,7 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.toggle();
   });
 });
-;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity) {
+;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
 
   $scope.user = appIdentity.currentUser;
@@ -408,6 +404,12 @@ angular.module('app').run(function ($rootScope, $location) {
   $scope.isLoggedIn = function(role) {
     if (role) { return appIdentity.isAuthorized(role); }
     return appIdentity.isAuthenticated();
+  };
+
+  $scope.signout = function() {
+    appAuth.logoutUser().then(function() {
+      $location.path('/');
+    });
   };
 });
 ;angular.module('app').controller('appHomeCtrl', function () {

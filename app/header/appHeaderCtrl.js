@@ -1,4 +1,4 @@
-angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity) {
+angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
 
   $scope.user = appIdentity.currentUser;
@@ -14,5 +14,11 @@ angular.module('app').controller('appHeaderCtrl', function ($scope, $location, a
   $scope.isLoggedIn = function(role) {
     if (role) { return appIdentity.isAuthorized(role); }
     return appIdentity.isAuthenticated();
+  };
+
+  $scope.signout = function() {
+    appAuth.logoutUser().then(function() {
+      $location.path('/');
+    });
   };
 });

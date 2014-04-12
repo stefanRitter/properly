@@ -8,11 +8,20 @@ header.header(ng-controller="appHeaderCtrl")
     a.button-gray.margin-left-sm(href="/login", ng-hide="onPath('/login')") Log in
     a.button-gray.header-pro-link(href="/pro") Rental owner?
 
+
   .header-logged-in.ng-hide(ng-show="isLoggedIn('verified')")
-    a.button-gray(href="/saved") &star; Saved
+    a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
     a.button-lightgray.margin-left-sm.margin-right-big(href="/account")
       | {{user.name}}
       .arrow-down-black.margin-left
+
+    .header-dropdown
+      a.underline(href="/account/settings") Your Profile
+      br
+      a.underline(href="/account/settings") Settings
+      br
+      a.underline(href="", ng-click="signout()") Logout
+
 
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
     a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard")
