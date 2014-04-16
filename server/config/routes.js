@@ -30,13 +30,13 @@ module.exports = function (app) {
   });
 
   // API
-  app.post('/api/users',       users.createUser);
-  app.put( '/api/users',       auth.authorize, users.updateUser);
-  app.post('/api/feedback',    feedback.createFeedback);
+  app.post('/api/users',     users.createUser);
+  app.put( '/api/users',     auth.authorize, users.updateUser);
+  app.post('/api/feedback',  feedback.createFeedback);
 
   // AUTH
-  app.post('/login',            auth.authenticateLocal);
-  app.post('/logout',           auth.logout);
+  app.post('/login',         auth.authenticateLocal);
+  app.post('/logout',        auth.logout);
 
   // ADMIN
   app.get('/admin/*',        auth.requiresRole('admin'), admin.get);
