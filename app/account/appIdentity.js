@@ -22,10 +22,6 @@ angular.module('app').factory('appIdentity', function ($window, $location, AppUs
     var currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
-
-    if (!appIdentity.hasRole('verified') && !appIdentity.hasRole('pro')) {
-      $location.path('/verify');
-    }
   }
 
   return appIdentity;

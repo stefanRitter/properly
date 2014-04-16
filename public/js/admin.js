@@ -217,10 +217,6 @@ angular.module('app').run(function ($rootScope, $location) {
     var currentUser = new AppUser();
     angular.extend(currentUser, $window.bootstrappedUser);
     appIdentity.currentUser = currentUser;
-
-    if (!appIdentity.hasRole('verified') && !appIdentity.hasRole('pro')) {
-      $location.path('/verify');
-    }
   }
 
   return appIdentity;
