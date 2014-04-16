@@ -390,10 +390,6 @@ angular.module('app').run(function ($rootScope, $location) {
 });
 ;angular.module('app').controller('appHeaderCtrl', function ($scope, $location, appIdentity, appAuth) {
   'use strict';
-
-  $scope.getUserName = function() {
-    return !!appIdentity.currentUser ? appIdentity.currentUser.name : '';
-  };
   
   $scope.onPath = function() {
     for (var i = 0, len = arguments.length; i < len; i++) {

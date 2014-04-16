@@ -28,6 +28,7 @@
 .header-logged-in-pro
   float right
   margin 0.3em
+
 .header-logged-out
   @media phablet
     .button-red
@@ -42,7 +43,7 @@
 
 .header-dropdown
   margin-left 120px
-  width 135px
+  width 138px
   background-color LightGray
   overflow hidden
   height 0
@@ -53,4 +54,11 @@
     display inline-block
     margin 10px 15px
   &.show
-    height 130px
+    height 165px
+
+.header-logged-in-pro
+  .header-dropdown-toggle
+    margin-left 118px
+  .header-dropdown
+    &.show
+      height 80px

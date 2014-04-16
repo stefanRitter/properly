@@ -13,11 +13,13 @@ header.header(ng-controller="appHeaderCtrl")
   .header-logged-in.ng-hide(ng-show="isLoggedIn('user')")
     a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
     .header-dropdown-toggle(ng-click="toggleDropdown()")
-      | {{getUserName()}}
+      | Account
       .arrow-down-black.margin-left
 
     .header-dropdown(ng-class="{'show': openDropdown}")
       a(href="/account/profile") Your Profile
+      br
+      a(href="/account/alerts") Your Alerts
       br
       a(href="/account/settings") Settings
       br
@@ -25,7 +27,13 @@ header.header(ng-controller="appHeaderCtrl")
 
 
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
-    a.button-lightgray.margin-left-sm.margin-right-big(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
-      | Dashboard
+    a.button-lightgray.margin-left-sm(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
+      | Pro Dashboard
+    .header-dropdown-toggle(ng-click="toggleDropdown()")
+      | Account
       .arrow-down-black.margin-left
-    a.button-lightgray(href="", ng-click="signout()", ng-show="onPath('/pro/dashboard')") Logout
+
+    .header-dropdown(ng-class="{'show': openDropdown}")
+      a(href="/account/settings") Settings
+      br
+      a(href="", ng-click="signout()") Logout
