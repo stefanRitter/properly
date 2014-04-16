@@ -1,2 +1,11 @@
 .header-spacer
-h1 Show home
+h1.center Edit Home
+
+.home-edit-header
+  a(href="/pro/home/{{id}}/basic" ng-class="{'active': activeStep('basic')}") Basic
+  a(href="/pro/home/{{id}}/details" ng-class="{'active': activeStep('details')}") Details
+  a(href="/pro/home/{{id}}/description" ng-class="{'active': activeStep('description')}") Description
+  a(href="/pro/home/{{id}}/pictures" ng-class="{'active': activeStep('pictures')}") Pictures
+  a(href="/pro/home/{{id}}/contact" ng-class="{'active': activeStep('contact')}") Contact
+
+div(ng-include="getStep()")

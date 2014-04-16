@@ -422,6 +422,16 @@ angular.module('app').run(function ($rootScope, $location) {
   'use strict';
 
   $scope.id = $routeParams.id;
+  $scope.step = $routeParams.step;
+
+  $scope.getStep = function() {
+    return '/partials/homes/edit/' + $scope.step;
+  };
+
+  $scope.activeStep = function(step) {
+    return step === $scope.step;
+  };
+
 });
 ;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams) {
   'use strict';

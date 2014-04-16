@@ -29,8 +29,8 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/pro/dashboard',  {templateUrl: '/partials/pro/dashboard',  controller: 'appProDashboardCtrl'})
     .when('/pro/tenant/:id', {templateUrl: '/partials/profile/show',   controller: 'appProfileShowCtrl'})
-    .when('/pro/home/:id/:step',   {templateUrl: '/partials/home/edit',  controller: 'appHomeEditCtrl'})
-    .when('/pro/home/:id',   {templateUrl: '/partials/home/show',  controller: 'appHomeEditCtrl'});
+    .when('/pro/home/:id/:step',   {templateUrl: '/partials/homes/edit',  controller: 'appHomeEditCtrl'})
+    .when('/pro/home/:id',   {templateUrl: '/partials/homes/show',  controller: 'appHomeEditCtrl'});
 
   // user urls - must be verified or admin, not pro user
   $routeProvider
