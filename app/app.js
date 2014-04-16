@@ -23,14 +23,14 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/saved',    {templateUrl: '/partials/saved/saved',    controller: 'appSavedCtrl'})
     .when('/login',    {templateUrl: '/partials/account/login',  controller: 'appLoginCtrl'})
     .when('/join',     {templateUrl: '/partials/account/join',   controller: 'appJoinCtrl'})
-    .when('/home/:id', {templateUrl: '/partials/property/show',  controller: 'appPropertyShowCtrl'});
+    .when('/home/:id', {templateUrl: '/partials/home/show',      controller: 'appHomeShowCtrl'});
   
   // pro account urls - must be admin or pro user
   $routeProvider
     .when('/pro/dashboard',  {templateUrl: '/partials/pro/dashboard',  controller: 'appProDashboardCtrl'})
     .when('/pro/tenant/:id', {templateUrl: '/partials/profile/show',   controller: 'appProfileShowCtrl'})
-    .when('/pro/home/:id/:step',   {templateUrl: '/partials/property/edit',  controller: 'appPropertyEditCtrl'})
-    .when('/pro/home/:id',   {templateUrl: '/partials/property/show',  controller: 'appPropertyEditCtrl'});
+    .when('/pro/home/:id/:step',   {templateUrl: '/partials/home/edit',  controller: 'appHomeEditCtrl'})
+    .when('/pro/home/:id',   {templateUrl: '/partials/home/show',  controller: 'appHomeEditCtrl'});
 
   // user urls - must be verified or admin, not pro user
   $routeProvider

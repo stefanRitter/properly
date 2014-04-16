@@ -392,7 +392,7 @@ angular.module('app').run(function ($rootScope, $location) {
   'use strict';
 
   $scope.getUserName = function() {
-    return appIdentity.currentUser.name;
+    return !!appIdentity.currentUser ? appIdentity.currentUser.name : '';
   };
   
   $scope.onPath = function() {
@@ -417,6 +417,16 @@ angular.module('app').run(function ($rootScope, $location) {
   $scope.toggleDropdown = function() {
     $scope.openDropdown = !$scope.openDropdown;
   };
+});
+;angular.module('app').controller('appHomeEditCtrl', function ($scope, $routeParams) {
+  'use strict';
+
+  $scope.id = $routeParams.id;
+});
+;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams) {
+  'use strict';
+
+  $scope.id = $routeParams.id;
 });
 ;angular.module('app').controller('appIndexCtrl', function ($scope, $location, $anchorScroll) {
   'use strict';
@@ -532,16 +542,6 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
   'use strict';
 
   $scope.id = 0;
-});
-;angular.module('app').controller('appPropertyEditCtrl', function ($scope, $routeParams) {
-  'use strict';
-
-  $scope.id = $routeParams.id;
-});
-;angular.module('app').controller('appPropertyShowCtrl', function ($scope, $routeParams) {
-  'use strict';
-
-  $scope.id = $routeParams.id;
 });
 ;angular.module('app').controller('appSavedCtrl', function ($scope) {
   'use strict';

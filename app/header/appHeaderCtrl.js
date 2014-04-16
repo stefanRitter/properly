@@ -2,7 +2,7 @@ angular.module('app').controller('appHeaderCtrl', function ($scope, $location, a
   'use strict';
 
   $scope.getUserName = function() {
-    return appIdentity.currentUser.name;
+    return !!appIdentity.currentUser ? appIdentity.currentUser.name : '';
   };
   
   $scope.onPath = function() {

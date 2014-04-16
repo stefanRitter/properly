@@ -69,12 +69,12 @@ exports.createDefaultUsers = function() {
       var pwd = encrypt.hashPwd(salt, 'Buzzr2014');
       
       User.findOneAndUpdate({email: 'unverified@properly.io'}, {email: 'unverified@properly.io',
-        name: 'unverified', salt: salt, password: pwd, roles: []},
+        name: 'unverified', salt: salt, password: pwd, roles: ['user']},
         {upsert: true}, function(err) {
         if (err) { throw err; }
       });
       User.findOneAndUpdate({email: 'verified@properly.io'}, {email: 'verified@properly.io',
-        name: 'Verified', salt: salt, password: pwd, roles: ['verified']},
+        name: 'Verified', salt: salt, password: pwd, roles: ['user', 'verified']},
         {upsert: true}, function(err) {
         if (err) { throw err; }
       });

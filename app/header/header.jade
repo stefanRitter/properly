@@ -10,7 +10,7 @@ header.header(ng-controller="appHeaderCtrl")
     a.button-gray.header-pro-link(href="/pro", ng-hide="onPath('/login')") Rental owner?
 
 
-  .header-logged-in.ng-hide(ng-show="isLoggedIn()")
+  .header-logged-in.ng-hide(ng-show="isLoggedIn('user')")
     a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
     .header-dropdown-toggle(ng-click="toggleDropdown()")
       | {{getUserName()}}
