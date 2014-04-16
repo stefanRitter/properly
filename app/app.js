@@ -17,7 +17,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
   // public urls - SEO enabled
   $routeProvider
-    .when('/',         {templateUrl: '/partials/home/home',      controller: 'appHomeCtrl'})
+    .when('/',         {templateUrl: '/partials/index/index',    controller: 'appIndexCtrl'})
     .when('/map',      {templateUrl: '/partials/map/map',        controller: 'appMapCtrl'})
     .when('/pro',      {templateUrl: '/partials/pro/pro',        controller: 'appProCtrl'})
     .when('/saved',    {templateUrl: '/partials/saved/saved',    controller: 'appSavedCtrl'})
@@ -29,8 +29,8 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/pro/dashboard',  {templateUrl: '/partials/pro/dashboard',  controller: 'appProDashboardCtrl'})
     .when('/pro/tenant/:id', {templateUrl: '/partials/profile/show',   controller: 'appProfileShowCtrl'})
-    .when('/pro/home/:id',   {templateUrl: '/partials/property/edit',  controller: 'appPropertyEditCtrl'})
-    .when('/pro/home/:id',   {templateUrl: '/partials/property/edit',  controller: 'appPropertyEditCtrl'});
+    .when('/pro/home/:id/:step',   {templateUrl: '/partials/property/edit',  controller: 'appPropertyEditCtrl'})
+    .when('/pro/home/:id',   {templateUrl: '/partials/property/show',  controller: 'appPropertyEditCtrl'});
 
   // user urls - must be verified or admin, not pro user
   $routeProvider

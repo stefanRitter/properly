@@ -418,7 +418,7 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.openDropdown = !$scope.openDropdown;
   };
 });
-;angular.module('app').controller('appHomeCtrl', function ($scope, $location, $anchorScroll) {
+;angular.module('app').controller('appIndexCtrl', function ($scope, $location, $anchorScroll) {
   'use strict';
   $anchorScroll();
   $scope.gotoAbout = function() {
