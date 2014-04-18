@@ -1,2 +1,42 @@
 .center
   h1.margin-top Basic
+
+  form.form(name="homeBasicForm")
+
+    .form-group
+      input(type="checkbox" name="longRent" value="1")
+      | Long rent
+      input(type="checkbox" name="shortRent" value="1")
+      | Short rent (&lt; 6 months)
+
+    .form-group
+      label Property type*
+      select
+        option Flat
+        option House
+    
+    .form-group
+      label Price per month*
+      input(name="email", type="text", placeholder="Job Title", ng-model="jobTitle", required)
+    
+    .form-group
+      label Address
+    
+      label Postcode*
+      input(name="email", type="text", placeholder="Employer", ng-model="employer", required)
+
+      label Street
+      input(name="email", type="text", placeholder="Income", ng-model="income", required)
+
+      label City*
+      select
+        option London
+    
+    .form-group
+      button.button-red.medium(ng-click="verify()", ng-disabled="homeBasicForm.$invalid") Next
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}
