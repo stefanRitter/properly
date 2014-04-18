@@ -3,13 +3,14 @@ header.header(ng-controller="appHeaderCtrl")
     .header-logo
       img(src="/img/logo.png", alt="properly")
 
-
+  //- Logged out
   .header-logged-out.ng-hide(ng-hide="onPath('/pro') || isLoggedIn()")
     a.button-red(href="/join", ng-hide="onPath('/join', '/login')") Join
     a.button-gray.margin-left-sm(href="/login", ng-hide="onPath('/login')") Log in
     a.button-gray.header-pro-link(href="/pro", ng-hide="onPath('/login')") Home owner?
 
 
+  //- Logged in User
   .header-logged-in.ng-hide(ng-show="isLoggedIn('user')")
     a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
     .header-dropdown-toggle(ng-click="toggleDropdown()")
@@ -26,6 +27,7 @@ header.header(ng-controller="appHeaderCtrl")
       a(href="", ng-click="signout()") Logout
 
 
+  //- Logged in Home owner
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
     a.button-lightgray.margin-left-sm(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
       | Pro Dashboard
