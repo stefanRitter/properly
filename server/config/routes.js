@@ -36,8 +36,7 @@ module.exports = function (app) {
   app.post('/api/feedback',  feedback.createFeedback);
   app.get( '/api/homes',     homes.searchHomes);
   app.get( '/api/homes/:id', homes.getHome);
-  app.post('/api/homes',     auth.requiresRole('pro'), homes.createHome);
-  app.put( '/api/homes',     auth.requiresRole('pro'), homes.updateHome);
+  app.post('/api/homes',     auth.requiresRole('pro'), homes.updateHome);
 
   // AUTH
   app.post('/login',         auth.authenticateLocal);

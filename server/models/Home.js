@@ -5,15 +5,20 @@ var mongoose = require('mongoose'),
 
 
 homeSchema = mongoose.Schema({
+  published: {type: Boolean, default: false, index: true},
   type: {type: String, index: true},
+  
   longRent: {type: Boolean, index: true},
   shortRent: {type: Boolean, index: true},
+  
   price: {type: Number, index: true},
+  bills: {type: String},
+  
   bedrooms: {type: Number, index: true},
   bathrooms: {type: Number, index: true},
     
   postcode: {type: String},
-  street: {type: String},
+  address: {type: String},
   city: {
     type: String,
     trim: true,
@@ -30,7 +35,7 @@ homeSchema = mongoose.Schema({
 
   contactEmail: {type: Boolean},
   contactPhone: {type: Boolean},
-  proAccount: [String],
+  proAccount: {type: String, index: true},
 
   pictures: [String]
 });

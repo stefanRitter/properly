@@ -417,19 +417,38 @@ angular.module('app').run(function ($rootScope, $location) {
 ;angular.module('app').factory('AppHome', function ($resource) {
   'use strict';
 
-  var HomeResource = $resource('/api/homes/:id', {_id: '@id'}, {
-    update: { method: 'PUT', isArray: false }
-  });
-
+  var HomeResource = $resource('/api/homes/:id', {_id: '@id'}, {});
   return HomeResource;
 });
-;angular.module('app').controller('appHomeEditCtrl', function ($scope, $routeParams, AppHome) {
+
+
+angular.module('app').factory('appCachedHome', function (AppHome) {
   'use strict';
+  var cachedHome = {};
+
+  return {
+    get: function(id) {
+      if (id === 'new') {
+        cachedHome = new AppHome();
+      }
+      else if (cachedHome._id !== id) {
+        cachedHome = AppHome.get({id: id});
+      }
+      return cachedHome;
+    },
+    set: function(newHome) {
+      cachedHome = newHome;
+    }
+  };
+});;angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome) {
+  'use strict';
+
+  var steps = ['basic', 'details', 'description', 'pictures', 'contact'];
 
   $scope.id = $routeParams.id;
   $scope.step = $routeParams.step;
 
-  $scope.home = new AppHome();
+  $scope.home = appCachedHome.get($scope.id);
 
   $scope.getStep = function() {
     return '/partials/homes/edit/' + $scope.step;
@@ -439,9 +458,16 @@ angular.module('app').run(function ($rootScope, $location) {
     return step === $scope.step;
   };
 
-  if ($scope.id !== 'new') {
-    $scope.home = AppHome.$get({_id: $scope.id});
-  }
+  $scope.verify = function() {
+    var next = steps.indexOf($scope.step) + 1;
+    $scope.home.$save().then(function() {
+      appCachedHome.set($scope.home);
+      $location.path('/pro/home/' + $scope.home._id + '/' + steps[next%steps.length]);
+    }, function (response) {
+      window.alert('$save() error');
+      console.log(response);
+    });
+  };
 });
 ;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams) {
   'use strict';
