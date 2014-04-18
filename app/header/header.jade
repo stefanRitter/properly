@@ -29,7 +29,7 @@ header.header(ng-controller="appHeaderCtrl")
 
   //- Logged in Home owner
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
-    a.button-lightgray.margin-left-sm(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
+    a.button-lightgray.margin-right-big(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
       | Pro Dashboard
     .header-dropdown-toggle(ng-click="toggleDropdown()", ng-show="onPath('/pro/dashboard')")
       | Account

@@ -6,7 +6,7 @@
       .feedback-close(ng-click="toggle()") &times;
       
       h2.italic Feedback / Help
-      form.form(name="feedbackForm", ng-hide="success")
+      form.form-phone(name="feedbackForm", ng-hide="success")
         .form-group
           label Email*
           input(type="email", ng-model="feedback.email", required)
