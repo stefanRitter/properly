@@ -31,11 +31,11 @@ header.header(ng-controller="appHeaderCtrl")
   .header-logged-in-pro.ng-hide(ng-show="isLoggedIn('pro')")
     a.button-lightgray.margin-left-sm(href="/pro/dashboard", ng-hide="onPath('/pro/dashboard')")
       | Pro Dashboard
-    .header-dropdown-toggle(ng-click="toggleDropdown()")
+    .header-dropdown-toggle(ng-click="toggleDropdown()", ng-show="onPath('/pro/dashboard')")
       | Account
       .arrow-down-black.margin-left
 
-    .header-dropdown(ng-class="{'show': openDropdown}")
+    .header-dropdown(ng-class="{'show': openDropdown}", ng-show="onPath('/pro/dashboard')")
       a(href="/account/settings") Settings
       br
       a(href="", ng-click="signout()") Logout
