@@ -1,16 +1,16 @@
 .center
   h2.italic.margin Edit Detail Information
 
-  form.form(name="homeDetailsForm")
+  form.form.form-phone-width(name="homeDetailsForm")
     .form-group
-      label Size*
-      input(type="text", placeholder="square meter / feet", ng-model="home.size")
-      select(ng-model="home.dimSys")
+      label Size:*
+      input.half.pull-left(type="number", placeholder="square meter/feet", ng-model="home.size")
+      select.half.pull-right(ng-model="home.dimSys")
         option sqm
         option sqf
     
     .form-group
-      label No. of Bedrooms*
+      label No. of Bedrooms:*
       select(ng-model="home.bedrooms")
         option 1
         option 2
@@ -19,7 +19,7 @@
         option 5
 
     .form-group
-      label No. of Bathrooms*
+      label No. of Bathrooms:*
       select(ng-model="home.bathrooms")
         option 1
         option 2
@@ -28,7 +28,7 @@
         option 5
     
     .form-group
-      label No. of Living rooms*
+      label No. of Living rooms:*
       select(ng-model="home.livingRooms")
         option 0
         option 1
@@ -38,7 +38,7 @@
         option 5
 
     .form-group
-      label Pets allowed*
+      label Pets allowed:*
       select(ng-model="home.pets")
         option No
         option Yes
@@ -46,13 +46,13 @@
         option Cats only
 
     .form-group
-      label Furnished*
+      label Furnished:*
       select(ng-model="home.furnished")
         option Yes
         option No
     
-    .form-group
-      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+    .form-group.margin-top
+      button.button-red.medium.home-edit-next(ng-click="verify()", ng-disabled="homeDetailsForm.$invalid") Next
       br
       span.required * required
 

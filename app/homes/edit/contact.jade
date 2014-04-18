@@ -3,16 +3,18 @@
 
   form.form(name="homeContactForm")
     .form-group
-      label How may Properly-verified tenants contact you?*
-      br
-      input(type="checkbox" name="longRent" value="1" ng-model="home.contactEmail" checked)
-      | Properly Email
-      br
-      input(type="checkbox" name="shortRent" value="1" ng-model="home.contactPhone")
-      | Telephone
+      p.bold How may Properly-verified tenants contact you?*
+      
+      .form-phone-width.left
+        .margin-top
+          input(type="checkbox" name="longRent" value="1" ng-model="home.contactEmail" checked)
+          | Properly Email
+        .margin-top
+          input(type="checkbox" name="shortRent" value="1" ng-model="home.contactPhone")
+          | Telephone
 
-    .form-group
-      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+    .form-group.margin-top
+      button.button-red.medium.home-edit-next(ng-click="verify()", ng-disabled="homeContactForm.$invalid") Next
       br
       span.required * required
 

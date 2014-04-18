@@ -3,36 +3,44 @@
 
   form.form(name="homeDescriptionForm")
     .form-group
-      label Description*
       p Tell your future tenants what's special about your place...
       textarea(ng-model="home.description")
 
-    .form-group
+    .form-group.form-phone-width
       label Features:
-      br
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Washing machine'" checked)
-      | Washing machine
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Central heating'" checked)
-      | Central heating
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Broadband internet'")
-      | Broadband internet
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Cable TV'")
-      | Cable TV
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Garden or Terrace'")
-      | Garden or Terrace
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Balcone'")
-      | Balcone
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Dishwasher'")
-      | Dishwasher
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Electrical Dryer'")
-      | Electrical Dryer
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Local Car parking'")
-      | Local Car parking
-      input(type="checkbox" checklist-model="home.features" checklist-value="'Space for bycicles'")
-      | Space for bycicles
+      .pull-left.left
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Washing machine'" checked)
+        | Washing machine
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Central heating'" checked)
+        | Central heating
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Broadband internet'")
+        | Broadband internet
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Cable TV'")
+        | Cable TV
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Garden or Terrace'")
+        | Garden or Terrace
+      .pull-right.left
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Balcone'")
+        | Balcone
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Dishwasher'")
+        | Dishwasher
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Electrical Dryer'")
+        | Electrical Dryer
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Local Car parking'")
+        | Local Car parking
+        .margin-top-sm
+        input(type="checkbox" checklist-model="home.features" checklist-value="'Space for bycicles'")
+        | Space for bycicles
 
-    .form-group
-      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+    .form-group.margin-top-sm
+      button.button-red.medium.home-edit-next(ng-click="verify()", ng-disabled="homeDescriptionForm.$invalid") Next
       br
       span.required * required
 

@@ -1,6 +1,52 @@
+.form
+  margin 0 auto
+  text-align center
+  font-size 14px
+  label
+    display block
+    margin 0 auto
+    font-weight 600
+    text-align left
+    width 300px
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='number'],
+  textarea,
+  select
+    display inline-block
+    margin 0 auto
+    padding 0
+    width 298px
+    height 30px
+    appearance none
+    border-radius 0
+    border 1px solid Gray
+    box-shadow none
+    text-indent 10px
+    background White
+    font-size 14px
+    &:focus
+      outline none
+    &.half
+      width 145px
+  select
+    width 300px
+    height 32px
+
+  textarea
+    min-height 150px
+    width 50%
+    min-width 298px
+
+.form-phone-width
+  margin 0 auto
+  width 300px
 
 .form-group
-  margin-top 1em
+  clear both
+  padding-top 1em
 
 .required
   font-size 0.8em
