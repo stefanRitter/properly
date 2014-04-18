@@ -414,6 +414,15 @@ angular.module('app').run(function ($rootScope, $location) {
     $scope.openDropdown = !$scope.openDropdown;
   };
 });
+;angular.module('app').factory('AppHome', function ($resource) {
+  'use strict';
+
+  var HomeResource = $resource('/api/homes/:id', {_id: '@id'}, {
+    update: { method: 'PUT', isArray: false }
+  });
+
+  return HomeResource;
+});
 ;angular.module('app').controller('appHomeEditCtrl', function ($scope, $routeParams) {
   'use strict';
 

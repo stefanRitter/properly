@@ -26,9 +26,11 @@ homeSchema = mongoose.Schema({
   },
   
   description: {type: String},
+  features: [String],
 
   contactEmail: {type: Boolean},
   contactPhone: {type: Boolean},
+  proAccount: [String],
 
   pictures: [String]
 });

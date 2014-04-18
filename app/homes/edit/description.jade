@@ -6,7 +6,31 @@
       label Description*
       p Tell your future tenants what's special about your place...
       textarea(name="description", ng-model="description", required)
-    
+
+    .form-group
+      label Features:
+      br
+      input(type="checkbox" name="longRent" value="1" checked)
+      | Washing machine
+      input(type="checkbox" name="longRent" value="1" checked)
+      | Central heating
+      input(type="checkbox" name="longRent" value="1")
+      | Broadband internet
+      input(type="checkbox" name="longRent" value="1")
+      | Cable TV
+      input(type="checkbox" name="longRent" value="1")
+      | Garden or Terrace
+      input(type="checkbox" name="longRent" value="1")
+      | Balcone
+      input(type="checkbox" name="longRent" value="1")
+      | Dishwasher
+      input(type="checkbox" name="longRent" value="1")
+      | Electrical Dryer
+      input(type="checkbox" name="longRent" value="1")
+      | Local Car parking
+      input(type="checkbox" name="longRent" value="1")
+      | Space for bycicles
+
     .form-group
       button.button-red.medium.home-edit-next(ng-click="verify()") Next
       br

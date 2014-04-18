@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash');
 
 
-exports.getUser = function (req, res) {
+exports.getUsers = function (req, res) {
   User.find().exec(function (err, collection) {
     res.send(collection);
   });

@@ -7,7 +7,7 @@
       input(name="price", type="text", placeholder="Rent per month", ng-model="rentPM", required)
 
     .form-group
-      label # Bedrooms*
+      label No. of Bedrooms*
       select
         option 1
         option 2
@@ -16,8 +16,18 @@
         option 5
 
     .form-group
-      label # Bathrooms*
+      label No. of Bathrooms*
       select
+        option 1
+        option 2
+        option 3
+        option 4
+        option 5
+    
+    .form-group
+      label No. of Living rooms*
+      select
+        option 0
         option 1
         option 2
         option 3
@@ -29,12 +39,14 @@
       select
         option No
         option Yes
+        option Dog only
+        option Cat only
 
     .form-group
       label Furnished*
       select
-        option Yes
-        option No
+        option yes
+        option no
     
     .form-group
       button.button-red.medium.home-edit-next(ng-click="verify()") Next
