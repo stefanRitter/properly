@@ -1,7 +1,11 @@
 .header-spacer
 .center
   h1.margin Welcome to your Properly Pro dashboard
+  
+  div(ng-show="hasHome()")
+    h2.margin-top Manage your listed homes:
+    
+    p.italic or
+  
   h2
     a.button-red.margin(href="/pro/home/new/basic") List a new Home
-  p.italic or
-  h2.margin-top Manage your listed homes:

@@ -530,13 +530,11 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
     });
   };
 });
-;angular.module('app').controller('appProDashboardCtrl', function ($scope, $location, appAuth) {
+;angular.module('app').controller('appProDashboardCtrl', function ($scope, appIdentity) {
   'use strict';
 
-  $scope.signout = function() {
-    appAuth.logoutUser().then(function() {
-      $location.path('/');
-    });
+  $scope.hasHome = function() {
+    return appIdentity.currentUser.homes.length > 0;
   };
 });
 ;angular.module('app').controller('appProfileEditCtrl', function ($scope) {
