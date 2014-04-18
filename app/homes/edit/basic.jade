@@ -14,10 +14,24 @@
       select
         option Flat
         option House
+        option Maisonette
+        option Studio
+        option Garden House
     
     .form-group
-      label Price per month*
+      label
+        | Price per 
+        strong month
+        | *
       input(name="price", type="text", placeholder="Rent per month", ng-model="rentPM", required)
+      br
+      label Exc/Inc which Bills?*
+      select
+        option
+        option Inc both Utilities and Council Tax
+        option Exc Utilities but inc Council Tax
+        option Inc Utilities but exc Council Tax
+        option Exc both Utilities and Council Tax
     
     .form-group
       label Address
@@ -27,15 +41,9 @@
 
       label Street
       input(name="address", type="text", placeholder="Street Address", ng-model="address", required)
-
-      label City*
-      select
-        option London
     
     .form-group
       button.button-red.medium.home-edit-next(ng-click="verify()") Next
-      br
-      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
       br
       span.required * required
 
