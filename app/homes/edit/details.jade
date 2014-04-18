@@ -4,11 +4,14 @@
   form.form(name="homeDetailsForm")
     .form-group
       label Size*
-      input(name="price", type="text", placeholder="Rent per month", ng-model="rentPM", required)
-
+      input(type="text", placeholder="square meter / feet", ng-model="home.size")
+      select(ng-model="home.dimSys")
+        option sqm
+        option sqf
+    
     .form-group
       label No. of Bedrooms*
-      select
+      select(ng-model="home.bedrooms")
         option 1
         option 2
         option 3
@@ -17,7 +20,7 @@
 
     .form-group
       label No. of Bathrooms*
-      select
+      select(ng-model="home.bathrooms")
         option 1
         option 2
         option 3
@@ -26,7 +29,7 @@
     
     .form-group
       label No. of Living rooms*
-      select
+      select(ng-model="home.livingRooms")
         option 0
         option 1
         option 2
@@ -36,15 +39,13 @@
 
     .form-group
       label Pets allowed*
-      select
+      select(ng-model="home.pets")
         option No
         option Yes
-        option Dog only
-        option Cat only
 
     .form-group
       label Furnished*
-      select
+      select(ng-model="home.furnished")
         option yes
         option no
     

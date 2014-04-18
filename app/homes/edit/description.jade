@@ -5,30 +5,30 @@
     .form-group
       label Description*
       p Tell your future tenants what's special about your place...
-      textarea(name="description", ng-model="description", required)
+      textarea(ng-model="home.description")
 
     .form-group
       label Features:
       br
-      input(type="checkbox" name="longRent" value="1" checked)
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Washing machine'" checked)
       | Washing machine
-      input(type="checkbox" name="longRent" value="1" checked)
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Central heating'" checked)
       | Central heating
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Broadband internet'")
       | Broadband internet
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Cable TV'")
       | Cable TV
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Garden or Terrace'")
       | Garden or Terrace
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Balcone'")
       | Balcone
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Dishwasher'")
       | Dishwasher
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Electrical Dryer'")
       | Electrical Dryer
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Local Car parking'")
       | Local Car parking
-      input(type="checkbox" name="longRent" value="1")
+      input(type="checkbox" checklist-model="home.features" checklist-value="'Space for bycicles'")
       | Space for bycicles
 
     .form-group

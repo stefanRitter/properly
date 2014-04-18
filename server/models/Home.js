@@ -12,10 +12,13 @@ homeSchema = mongoose.Schema({
   shortRent: {type: Boolean, index: true},
   
   price: {type: Number, index: true},
+  size: {type: Number, index: true},
+  dimSys: {type: String, default: 'sqm'},
   bills: {type: String},
   
   bedrooms: {type: Number, index: true},
   bathrooms: {type: Number, index: true},
+  livingRooms: {type: Number, index: true},
     
   postcode: {type: String},
   address: {type: String},
@@ -32,6 +35,9 @@ homeSchema = mongoose.Schema({
   
   description: {type: String},
   features: [String],
+
+  pets: {type: Boolean, index: true},
+  furnished: {type: Boolean, index: true},
 
   contactEmail: {type: Boolean},
   contactPhone: {type: Boolean},

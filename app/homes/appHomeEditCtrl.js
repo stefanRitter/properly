@@ -21,8 +21,9 @@ angular.module('app').controller('appHomeEditCtrl', function ($scope, $location,
     $scope.home.$save().then(function() {
       appCachedHome.set($scope.home);
       $location.path('/pro/home/' + $scope.home._id + '/' + steps[next%steps.length]);
+    
     }, function (response) {
-      window.alert('$save() error');
+      window.alert('Sorry there was an unexpected server error! Please contact us for help if this happens again.');
       console.log(response);
     });
   };

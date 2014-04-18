@@ -4,9 +4,9 @@
   form.form(name="homeBasicForm")
     .form-group
       label Duration*
-      input(type="checkbox" name="longRent" value="1" ng-model="home.longRent")
+      input(type="checkbox" ng-model="home.longRent")
       | Long rent
-      input(type="checkbox" name="shortRent" value="1" ng-model="home.shortRent")
+      input(type="checkbox" ng-model="home.shortRent")
       | Short rent (&lt; 6 months)
 
     .form-group
@@ -23,7 +23,7 @@
         | Price per 
         strong month
         | *
-      input(name="price", type="text", placeholder="Rent per month", ng-model="home.price", required)
+      input(type="text", placeholder="Rent per month", ng-model="home.price")
       br
       label Exc/Inc which Bills?*
       select(ng-model="home.bills")
@@ -37,10 +37,15 @@
       label Address
     
       label Postcode*
-      input(name="postcode", type="text", placeholder="Postcode", ng-model="home.postcode", required)
+      input(type="text", placeholder="Postcode", ng-model="home.postcode")
 
       label Street
-      input(name="address", type="text", placeholder="Street Address", ng-model="home.address", required)
+      input(type="text", placeholder="Street Address", ng-model="home.address")
+
+      label City
+      select
+        option London
+        option Sorry we are only in London
     
     .form-group
       button.button-red.medium.home-edit-next(ng-click="verify()") Next
