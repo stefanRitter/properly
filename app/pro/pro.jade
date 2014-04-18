@@ -12,11 +12,11 @@
       input(name="password", type="password", placeholder="Password", ng-model="password", required)
     
     .form-group
-      button.button-red.medium(ng-click="signup()", ng-disabled="signupForm.$invalid") Sign up
+      button.button-red.medium(ng-click="signup()") Sign up
       br
       span.required * required
 
-    .form-group
+    .form-group.ng-hide(ng-hide="false")
       .error {{notifier.error}}
       .notice {{notifier.notice}}
     
