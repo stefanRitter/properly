@@ -1,5 +1,5 @@
 .center
-  h2.italic.margin-top Edit Basic Information
+  h2.italic.margin Edit Basic Information
 
   form.form(name="homeBasicForm")
     .form-group
@@ -33,7 +33,9 @@
         option London
     
     .form-group
-      button.button-red.medium(ng-click="verify()", ng-disabled="homeBasicForm.$invalid") Next
+      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+      br
+      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
       br
       span.required * required
 

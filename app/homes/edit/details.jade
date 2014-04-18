@@ -1,2 +1,48 @@
 .center
-  h1.margin-top Details
+  h2.italic.margin Edit Detail Information
+
+  form.form(name="homeDetailsForm")
+    .form-group
+      label Size*
+      input(name="price", type="text", placeholder="Rent per month", ng-model="rentPM", required)
+
+    .form-group
+      label # Bedrooms*
+      select
+        option 1
+        option 2
+        option 3
+        option 4
+        option 5
+
+    .form-group
+      label # Bathrooms*
+      select
+        option 1
+        option 2
+        option 3
+        option 4
+        option 5
+
+    .form-group
+      label Pets allowed*
+      select
+        option No
+        option Yes
+
+    .form-group
+      label Furnished*
+      select
+        option Yes
+        option No
+    
+    .form-group
+      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+      br
+      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}

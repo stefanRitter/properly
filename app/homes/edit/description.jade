@@ -1,2 +1,19 @@
 .center
-  h1.margin-top Description
+  h2.italic.margin-top Add a Description
+
+  form.form(name="homeDescriptionForm")
+    .form-group
+      label Description*
+      p Tell your future tenants what's special about your place...
+      textarea(name="description", ng-model="description", required)
+    
+    .form-group
+      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+      br
+      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}

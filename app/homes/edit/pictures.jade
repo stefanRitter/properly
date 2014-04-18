@@ -1,2 +1,21 @@
 .center
-  h1.margin-top Pictures
+  h2.italic.margin Add Pictures
+  p
+    span.medium A picture is worth a thousand words.
+    br
+    | Attract great tenants: 
+    a.underline(href="http://blog.properly.io/guides") View the Properly guide to proper home pictures.
+
+  div.margin-top
+    | uploader...
+
+    .form-group
+      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+      br
+      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}

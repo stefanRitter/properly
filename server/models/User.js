@@ -18,25 +18,24 @@ userSchema = mongoose.Schema({
   logins: [String],
   
   name:     {type: String, trim: true, required: false},
-  location: {type: String, trim: true, required: false},
-  lang:     {type: String, trim: true, required: false},
-  url:      {type: String, trim: true, required: false},
   
   salt:     {type: String, required: '{PATH} is required!'},
   password: {type: String, required: '{PATH} is required!'},
   roles:    [String],
+
+  alerts: [String],
+  homes: [String]
 });
 
 // remove sensitive data
 userSchema.methods.safe = function() {
   return {
     _id: this._id,
-    name: this.name || this.email,
+    name: this.name,
     email: this.email,
     roles: this.roles,
-    buzzrs: this.buzzrs,
-    readlater: this.readlater,
-    activities: this.activities
+    homes: this.homes,
+    alerts: this.alerts
   };
 };
 

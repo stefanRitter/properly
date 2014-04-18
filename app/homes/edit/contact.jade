@@ -1,2 +1,23 @@
 .center
-  h1.margin-top Contact
+  h2.italic.margin Add Contact Information
+
+  form.form(name="homeContactForm")
+    .form-group
+      label How may Properly-verified tenants contact you?*
+      br
+      input(type="checkbox" name="longRent" value="1", checked)
+      | Properly Email
+      br
+      input(type="checkbox" name="shortRent" value="1")
+      | Telephone
+
+    .form-group
+      button.button-red.medium.home-edit-next(ng-click="verify()") Next
+      br
+      button.button-lightgray.medium(ng-click="saveDraft()") Save draft
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}
