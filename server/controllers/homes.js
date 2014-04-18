@@ -3,9 +3,11 @@
 var mongoose = require('mongoose'),
     Home = mongoose.model('Home');
 
-function validateHome(data) {
-  delete data._id;
-  return data;
+function orBoolean(newData, original) {
+  if (newData === undefined) {
+    return original;
+  }
+  return newData;
 }
 
 exports.searchHomes = function (req, res) {
@@ -24,16 +26,60 @@ exports.getHome = function (req, res) {
 };
 
 exports.updateHome = function (req, res) {
-  var newHome = validateHome(req.body),
-      id = req.body._id,
-      returnHome = function(err, home) {
-        if (err) { throw err; }
-        res.json(home);
-      };
+  var newHome = req.body;
 
-  if (!!id) {
-    Home.findOneAndUpdate({_id: id}, newHome, {upsert: true}, returnHome);
-  } else {
-    Home.create(newHome, returnHome);
-  }
+  Home.findOne({_id: req.body._id}, function(err, home) {
+    /*jshint maxstatements: false */
+    /*jshint maxcomplexity: false */
+    
+    if (err) { throw err; }
+    if (!home) { home = new Home(); }
+    
+    home.proAccount = home.proAccount || req.user._id;
+
+    home.published = home.published;
+    home.type = newHome.type || home.type;
+    
+    
+    home.longRent = orBoolean(newHome.longRent, home.longRent);
+    home.shortRent = orBoolean(newHome.shortRent, home.shortRent);
+    home.contactEmail = orBoolean(newHome.contactEmail, home.contactEmail);
+    home.contactPhone = orBoolean(newHome.contactPhone, home.contactPhone);
+
+    home.price = newHome.price || home.price;
+    home.size = newHome.size || home.size;
+    home.dimSys = newHome.dimSys || home.dimSys;
+    home.bills = newHome.bills || home.bills;
+    home.bedrooms = newHome.bedrooms || home.bedrooms;
+    home.bathrooms = newHome.bathrooms || home.bathrooms;
+    home.livingRooms = newHome.livingRooms || home.livingRooms;
+
+    // get location
+    home.postcode = newHome.postcode || home.postcode;
+    home.address = newHome.address || home.address;
+    home.city = 'london';
+    /*
+    loc: {
+      type: [Number],
+      index: '2dsphere'
+    }
+    */
+    
+    home.description = newHome.description || home.description;
+    home.features = newHome.features || home.features;
+    home.furnished = newHome.furnished || home.furnished;
+    home.pets = newHome.pets || home.pets;
+
+    // images
+    home.pictures = [];
+    
+    home.save(function (err) {
+      if (err) {
+        res.status(400);
+        return res.send({reason: err.toString()});
+      }
+      req.user.addHome(home);
+      res.json(home);
+    });
+  });
 };

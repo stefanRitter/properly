@@ -36,8 +36,8 @@ homeSchema = mongoose.Schema({
   description: {type: String},
   features: [String],
 
-  pets: {type: Boolean, index: true},
-  furnished: {type: Boolean, index: true},
+  pets: {type: String, index: true},
+  furnished: {type: String, index: true},
 
   contactEmail: {type: Boolean},
   contactPhone: {type: Boolean},

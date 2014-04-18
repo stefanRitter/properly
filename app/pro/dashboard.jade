@@ -5,6 +5,9 @@
   div(ng-show="hasHome()")
     h2.margin-top Manage your listed homes:
     
+    .margin(ng-repeat="home in homes")
+      a.underline(href="/pro/home/{{home}}/basic") {{home}}
+
     p.italic or
   
   h2

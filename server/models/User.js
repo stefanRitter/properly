@@ -27,6 +27,14 @@ userSchema = mongoose.Schema({
   homes: [String]
 });
 
+userSchema.methods.addHome = function(home) {
+  if (this.homes.indexOf(home._id) === -1) {
+    this.homes.push(home._id);
+    // TODO: limit to max 100 homes
+    this.save();
+  }
+};
+
 // remove sensitive data
 userSchema.methods.safe = function() {
   return {

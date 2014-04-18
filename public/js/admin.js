@@ -674,8 +674,10 @@ angular.module('app').factory('appMap', function (appGoogle, appIsMobile) {
 ;angular.module('app').controller('appProDashboardCtrl', function ($scope, appIdentity) {
   'use strict';
 
+  $scope.homes = appIdentity.currentUser.homes || [];
+
   $scope.hasHome = function() {
-    return appIdentity.currentUser.homes.length > 0;
+    return $scope.homes.length > 0;
   };
 });
 ;angular.module('app').controller('appProfileEditCtrl', function ($scope) {
