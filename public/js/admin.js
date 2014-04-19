@@ -540,14 +540,13 @@ angular.module('app').factory('appCachedHome', function (AppHome) {
       cachedHome = newHome;
     }
   };
-});;angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome) {
+});;angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder) {
   'use strict';
 
   var steps = ['basic', 'details', 'description', 'pictures', 'contact'];
 
   $scope.id = $routeParams.id;
   $scope.step = $routeParams.step;
-
   $scope.home = appCachedHome.get($scope.id);
 
   $scope.getStep = function() {
@@ -572,6 +571,13 @@ angular.module('app').factory('appCachedHome', function (AppHome) {
     }, function (response) {
       window.alert('Sorry there was an unexpected server error! Please contact us for help if this happens again.');
       console.log(response);
+    });
+  };
+
+  $scope.geocode = function() {
+    var address = $scope.home.address+','+$scope.home.postcode+', London UK';
+    appGeocoder.geocode(address).then(function(res) {
+      $scope.home.loc = [res.lat, res.lng];
     });
   };
 });
@@ -602,8 +608,7 @@ angular.module('app').factory('appMapObject', function () {
   };
 });
 
-
-angular.module('app').directive('appMap', function (appGoogle, appMapObject, appIsMobile) {
+angular.module('app').directive('googleMap', function (appGoogle, appMapObject, appIsMobile) {
   'use strict';
 
   var google = appGoogle,
@@ -672,7 +677,32 @@ angular.module('app').directive('appMap', function (appGoogle, appMapObject, app
 
   $scope.map = {};
 });
-;angular.module('app').factory('appSearch', function () {
+;angular.module('app').factory('appGeocoder', function (appGoogle, $q) {
+  'use strict';
+  
+  var google = appGoogle,
+      geocoder = new google.maps.Geocoder();
+  
+  function geocode(stringAddress) {
+    var dfd = $q.defer();
+    geocoder.geocode( {'address': stringAddress}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        var coords = {
+          lat: results[0].geometry.location.lat(),
+          lng: results[0].geometry.location.lng()
+        };
+        dfd.resolve(coords);
+      } else {
+        window.alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+    return dfd.promise;
+  }
+
+  return {
+    geocode: geocode
+  };
+});;angular.module('app').factory('appSearch', function () {
   'use strict';
 
 });

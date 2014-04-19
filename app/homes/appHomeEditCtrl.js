@@ -1,11 +1,10 @@
-angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome) {
+angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder) {
   'use strict';
 
   var steps = ['basic', 'details', 'description', 'pictures', 'contact'];
 
   $scope.id = $routeParams.id;
   $scope.step = $routeParams.step;
-
   $scope.home = appCachedHome.get($scope.id);
 
   $scope.getStep = function() {
@@ -30,6 +29,13 @@ angular.module('app').controller('appHomeEditCtrl', function ($scope, $location,
     }, function (response) {
       window.alert('Sorry there was an unexpected server error! Please contact us for help if this happens again.');
       console.log(response);
+    });
+  };
+
+  $scope.geocode = function() {
+    var address = $scope.home.address+','+$scope.home.postcode+', London UK';
+    appGeocoder.geocode(address).then(function(res) {
+      $scope.home.loc = [res.lat, res.lng];
     });
   };
 });

@@ -13,8 +13,7 @@ angular.module('app').factory('appMapObject', function () {
   };
 });
 
-
-angular.module('app').directive('appMap', function (appGoogle, appMapObject, appIsMobile) {
+angular.module('app').directive('googleMap', function (appGoogle, appMapObject, appIsMobile) {
   'use strict';
 
   var google = appGoogle,

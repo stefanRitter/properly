@@ -58,12 +58,7 @@ exports.updateHome = function (req, res) {
     home.postcode = newHome.postcode || home.postcode;
     home.address = newHome.address || home.address;
     home.city = 'london';
-    /*
-    loc: {
-      type: [Number],
-      index: '2dsphere'
-    }
-    */
+    home.loc = newHome.loc || home.loc;
     
     home.description = newHome.description || home.description;
     home.features = newHome.features || home.features;
