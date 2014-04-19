@@ -30,7 +30,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       zoom: 13,
       minZoom: 12,
       maxZoom: 20,
-      zoomControl: true, // true to use zoomControlOptions below, false to remove all zoom controls.
+      zoomControl: false, // true to use zoomControlOptions below, false to remove all zoom controls.
       zoomControlOptions: {
         style: google.maps.ZoomControlStyle.DEFAULT // Change to SMALL to force just the + and - buttons.
       },
