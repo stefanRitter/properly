@@ -32,4 +32,6 @@ angular.module('app').controller('appHomeEditCtrl', function ($scope, $location,
       console.log(response);
     });
   };
+
+  //$scope.init = appMap.init;
 });

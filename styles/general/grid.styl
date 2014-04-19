@@ -1,0 +1,17 @@
+half = (100%/2)
+
+.grid100
+  clear both
+  width 100%
+  margin 0
+
+.grid-1-2
+  width: (half - 1)
+
+[class^="grid-"],
+[class*=" grid-"]
+  float left
+  margin-left 0.5%
+  margin-right 0.5%
+  @media phablet
+    width 99%

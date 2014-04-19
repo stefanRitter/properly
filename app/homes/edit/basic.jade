@@ -1,55 +1,59 @@
-.center
-  h2.italic.margin Edit Basic Information
+.pages-container
+  h2.italic.margin.center Edit Basic Information
+  .grid-1-2
+    form.form.form-phone-width(name="homeBasicForm")
+      .form-group.left
+        label Duration:*
+        .pull-left
+          input(type="checkbox" ng-model="home.longRent")
+          | Long rent
+        .pull-right
+          input.margin-left-big(type="checkbox" ng-model="home.shortRent")
+          | Short rent (&lt; 6 months)
 
-  form.form.form-phone-width(name="homeBasicForm")
-    .form-group.left
-      label Duration:*
-      .pull-left
-        input(type="checkbox" ng-model="home.longRent")
-        | Long rent
-      .pull-right
-        input.margin-left-big(type="checkbox" ng-model="home.shortRent")
-        | Short rent (&lt; 6 months)
+      .form-group
+        label Property type:*
+        select(ng-model="home.type")
+          option Flat
+          option House
+          option Maisonette
+          option Studio
+          option Garden House
+      
+      .form-group
+        label Price per month:*
+        input(type="number", placeholder="Rent per month", ng-model="home.price")
+      
+      .form-group
+        label Exc/Inc which Bills?*
+        select(ng-model="home.bills")
+          option
+          option Inc both Utilities and Council Tax
+          option Exc Utilities but inc Council Tax
+          option Inc Utilities but exc Council Tax
+          option Exc both Utilities and Council Tax
+      
+      .form-group
+        label Postcode:*
+        input(type="text", placeholder="Postcode", ng-model="home.postcode")
+      .form-group
+        label Street:
+        input(type="text", placeholder="Street Address", ng-model="home.address")
+      .form-group
+        label City:
+        select
+          option London
+          option Sorry we are only in London
+      
+      .form-group.margin-top
+        button.button-red.medium.home-edit-next(ng-click="verify()", ng-disabled="homeBasicForm.$invalid") Next
+        br
+        span.required * required
 
-    .form-group
-      label Property type:*
-      select(ng-model="home.type")
-        option Flat
-        option House
-        option Maisonette
-        option Studio
-        option Garden House
-    
-    .form-group
-      label Price per month:*
-      input(type="number", placeholder="Rent per month", ng-model="home.price")
-    
-    .form-group
-      label Exc/Inc which Bills?*
-      select(ng-model="home.bills")
-        option
-        option Inc both Utilities and Council Tax
-        option Exc Utilities but inc Council Tax
-        option Inc Utilities but exc Council Tax
-        option Exc both Utilities and Council Tax
-    
-    .form-group
-      label Postcode:*
-      input(type="text", placeholder="Postcode", ng-model="home.postcode")
-    .form-group
-      label Street:
-      input(type="text", placeholder="Street Address", ng-model="home.address")
-    .form-group
-      label City:
-      select
-        option London
-        option Sorry we are only in London
-    
-    .form-group.margin-top
-      button.button-red.medium.home-edit-next(ng-click="verify()", ng-disabled="homeBasicForm.$invalid") Next
-      br
-      span.required * required
+      .form-group
+        .error {{notifier.error}}
+        .notice {{notifier.notice}}
+  
+  .grid-1-2.form-map
+    div#map-canvas(app-map)
 
-    .form-group
-      .error {{notifier.error}}
-      .notice {{notifier.notice}}

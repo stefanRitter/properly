@@ -1,7 +1,7 @@
-angular.module('app').controller('appMapCtrl', function ($scope, appMap) {
+angular.module('app').controller('appMapCtrl', function ($scope) {
   'use strict';
 
   $scope.map = {};
-  appMap.init();
-  appMap.setMarker();
+  //appMap.init();
+  //appMap.setMarker();
 });
