@@ -1,19 +1,17 @@
 angular.module('app').value('appGoogle', window.google);
 
-angular.module('app').factory('appMapObject', function () {
+angular.module('app').factory('appMap', function ($rootScope) {
   'use strict';
-  var map = {};
+
   return {
-    set: function(newMap) {
-      map = newMap;
-    },
-    get: function() {
-      return map;
+    setCenter: function(latLang) {
+      $rootScope.$broadcast('appMapSetCenter', latLang);
     }
   };
 });
 
-angular.module('app').directive('googleMap', function (appGoogle, appMapObject, appIsMobile) {
+
+angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
   'use strict';
 
   var google = appGoogle,
@@ -47,7 +45,6 @@ angular.module('app').directive('googleMap', function (appGoogle, appMapObject, 
     };
 
     map = new google.maps.Map(element, mapOptions);
-    appMapObject.set(map);
   }
 
   function setMarker() {
@@ -71,9 +68,14 @@ angular.module('app').directive('googleMap', function (appGoogle, appMapObject, 
     restrict: 'A',
     replace: false,
     priority: 1000,
-    controller: ['$element', '$scope', function($element) {
+    controller: ['$scope', '$element', function($scope, $element) {
       init($element[0]);
       setMarker();
+
+      $scope.$on('appMapSetCenter', function(e, data) {
+        map.setCenter(new google.maps.LatLng(data.lat, data.lng));
+        map.setZoom(16);
+      });
     }]
   };
 });

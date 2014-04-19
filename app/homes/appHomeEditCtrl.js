@@ -1,4 +1,4 @@
-angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder) {
+angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder, appMap) {
   'use strict';
 
   var steps = ['basic', 'details', 'description', 'pictures', 'contact'];
@@ -33,9 +33,14 @@ angular.module('app').controller('appHomeEditCtrl', function ($scope, $location,
   };
 
   $scope.geocode = function() {
+    if (!!$scope.geocoding) { return; }
+    
+    $scope.geocoding = true;
     var address = $scope.home.address+','+$scope.home.postcode+', London UK';
     appGeocoder.geocode(address).then(function(res) {
       $scope.home.loc = [res.lat, res.lng];
+      appMap.setCenter(res);
+      $scope.geocoding = false;
     });
   };
 });

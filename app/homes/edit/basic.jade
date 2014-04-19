@@ -41,7 +41,7 @@
         .pull-left
           input.half(type="text", placeholder="Postcode", ng-model="home.postcode")
         .pull-right
-          .button-red(ng-click="geocode()", style="padding: 5px 15px;") Update map
+          button.button-red(ng-click="geocode()", ng-disabled="geocoding") Update map
       .form-group
         label City*:
         select(ng-click="geocode()")
