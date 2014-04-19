@@ -4,8 +4,11 @@ angular.module('app').factory('appMap', function ($rootScope) {
   'use strict';
 
   return {
-    setCenter: function(latLang) {
-      $rootScope.$broadcast('appMapSetCenter', latLang);
+    setCenter: function(data) {
+      $rootScope.$broadcast('appMapSetCenter', data);
+    },
+    setMarker: function(data) {
+      $rootScope.$broadcast('appMapSetMarker', data);
     }
   };
 });
@@ -27,21 +30,20 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       zoom: 13,
       minZoom: 12,
       maxZoom: 20,
-      zoomControl: true, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
+      zoomControl: true, // true to use zoomControlOptions below, false to remove all zoom controls.
       zoomControlOptions: {
         style: google.maps.ZoomControlStyle.DEFAULT // Change to SMALL to force just the + and - buttons.
       },
       center: latLang,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       scrollwheel: !appIsMobile.any(), // Disable Mouse Scroll zooming on mobile
-     
-      // All of the below are set to true by default, so simply remove if set to true:
-      panControl: false, // Set to false to disable
-      mapTypeControl: false, // Disable Map/Satellite switch
-      scaleControl: false, // Set to false to hide scale
-      streetViewControl: false, // Set to disable to hide street view
-      overviewMapControl: false, // Set to false to remove overview control
-      rotateControl: false // Set to false to disable rotate control
+
+      panControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      overviewMapControl: false,
+      rotateControl: false
     };
 
     map = new google.maps.Map(element, mapOptions);
@@ -51,16 +53,15 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     var marker = new google.maps.Marker({
       position: latLang,
       icon: bluePin,
-      map: map,
-      title: 'new home?'
+      map: map
     });
     
-    var infowindow = new google.maps.InfoWindow({ // Create a new InfoWindow
-      content: '<h3>Snowdown Summit Cafe</h3><p>Railway Drive-through available.</p>' // HTML contents of the InfoWindow
+    var infowindow = new google.maps.InfoWindow({
+      content: '<h3>Snowdown Summit Cafe</h3><p>Railway Drive-through available.</p>'
     });
 
-    google.maps.event.addListener(marker, 'click', function() { // Add a Click Listener to our marker
-      infowindow.open(map, marker); // Open our InfoWindow
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
     });
   }
 
@@ -75,6 +76,10 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       $scope.$on('appMapSetCenter', function(e, data) {
         map.setCenter(new google.maps.LatLng(data.lat, data.lng));
         map.setZoom(16);
+      });
+      
+      $scope.$on('appMapSetMarker', function(e, data) {
+        setMarker(data);
       });
     }]
   };
