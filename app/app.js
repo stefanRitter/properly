@@ -23,7 +23,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/saved',    {templateUrl: '/partials/saved/saved',    controller: 'appSavedCtrl'})
     .when('/login',    {templateUrl: '/partials/account/login',  controller: 'appLoginCtrl'})
     .when('/join',     {templateUrl: '/partials/account/join',   controller: 'appJoinCtrl'})
-    .when('/home/:id', {templateUrl: '/partials/home/show',      controller: 'appHomeShowCtrl'});
+    .when('/home/:id', {templateUrl: '/partials/homes/show',      controller: 'appHomeShowCtrl'});
   
   // pro account urls - must be admin or pro user
   $routeProvider

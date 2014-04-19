@@ -540,7 +540,33 @@ angular.module('app').factory('appCachedHome', function (AppHome) {
       cachedHome = newHome;
     }
   };
-});;angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder, appMap) {
+});
+
+
+angular.module('app').factory('appCachedHomes', function (AppHome) {
+  'use strict';
+  var cachedHomes = [];
+
+  return {
+    search: function(search, cb) {
+      if (!!search || !cachedHomes) {
+        cachedHomes = AppHome.query(search, cb);
+      }
+      return cachedHomes;
+    },
+    
+    get: function(id) {
+      var home;
+      cachedHomes.forEach(function (hme) {
+        if (hme._id === id) {
+          home = hme;
+        }
+      });
+      return !home ? AppHome.get({id: id}) : home;
+    }
+  };
+});
+;angular.module('app').controller('appHomeEditCtrl', function ($scope, $location, $routeParams, appCachedHome, appGeocoder, appMap) {
   'use strict';
 
   var steps = ['basic', 'details', 'description', 'pictures', 'contact'];
@@ -591,6 +617,24 @@ angular.module('app').factory('appCachedHome', function (AppHome) {
 
   $scope.id = $routeParams.id;
 });
+;angular.module('app').directive('homeSideView', function (appCachedHomes) {
+  'use strict';
+
+  return {
+    restrict: 'C',
+    replace: false,
+    priority: 1000,
+    controller: ['$scope', '$element', function($scope) {
+      $scope.home = {};
+
+      $scope.$on('appShowHome', function(e, data) {
+        if ($scope.home._id === data._id) { return; }
+        $scope.home._id = data._id;
+        $scope.home = appCachedHomes.get(data._id);
+      });
+    }]
+  };
+});
 ;angular.module('app').controller('appIndexCtrl', function ($scope, $location, $anchorScroll) {
   'use strict';
   $anchorScroll();
@@ -621,7 +665,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       latLang = new google.maps.LatLng(51.5096283,-0.1114692),
       map;
 
-  var bluePin = new google.maps.MarkerImage('http://www.creare.co.uk/wp-content/uploads/2013/08/marker.png',
+  var pinRed = new google.maps.MarkerImage('/img/pin-red.png',
       null, null, null, new google.maps.Size(40,52));
   // var redPin = new google.maps.MarkerImage('/img/redPin.png', null, null, null, new google.maps.Size(40,52));
 
@@ -655,12 +699,13 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
 
     var marker = new google.maps.Marker({
       position: loc,
-      icon: bluePin,
-      map: map
+      icon: pinRed,
+      map: map,
+      animation: google.maps.Animation.DROP
     });
     
     var infowindow = new google.maps.InfoWindow({
-      content: '<h3>Snowdown Summit Cafe</h3><p>Railway Drive-through available.</p>'
+      content: '<div class="home-link" id="'+data._id+'">Click me!</div>'
     });
 
     google.maps.event.addListener(marker, 'click', function() {
@@ -672,7 +717,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     restrict: 'A',
     replace: false,
     priority: 1000,
-    controller: ['$scope', '$element', function($scope, $element) {
+    controller: ['$scope', '$element', '$rootScope', function($scope, $element, $rootScope) {
       init($element[0]);
 
       $scope.$on('appMapSetCenter', function(e, data) {
@@ -683,20 +728,25 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       $scope.$on('appMapSetMarker', function(e, data) {
         setMarker(data);
       });
+
+      $element.on('click', function(e) {
+        if (e.target.className !== 'home-link') { return; }
+        $rootScope.$broadcast('appShowHome', {_id: e.target.id});
+      });
     }]
   };
 });
-;angular.module('app').controller('appMapCtrl', function ($scope, AppHome, appMap) {
+;angular.module('app').controller('appMapCtrl', function ($scope, appCachedHomes, appMap) {
   'use strict';
 
   $scope.search = {
-    pets: 'None',
-    smoker: false
+    pets: 'None'
   };
 
-  AppHome.query(function(data) {
+  appCachedHomes.search({}, function(data) {
     data.forEach(function(home) {
       var markerData = {
+        _id: home._id,
         loc: home.loc,
         price: home.price,
         beds: home.bedrooms,

@@ -1,14 +1,14 @@
-angular.module('app').controller('appMapCtrl', function ($scope, AppHome, appMap) {
+angular.module('app').controller('appMapCtrl', function ($scope, appCachedHomes, appMap) {
   'use strict';
 
   $scope.search = {
-    pets: 'None',
-    smoker: false
+    pets: 'None'
   };
 
-  AppHome.query(function(data) {
+  appCachedHomes.search({}, function(data) {
     data.forEach(function(home) {
       var markerData = {
+        _id: home._id,
         loc: home.loc,
         price: home.price,
         beds: home.bedrooms,

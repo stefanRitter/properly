@@ -25,3 +25,28 @@ angular.module('app').factory('appCachedHome', function (AppHome) {
     }
   };
 });
+
+
+angular.module('app').factory('appCachedHomes', function (AppHome) {
+  'use strict';
+  var cachedHomes = [];
+
+  return {
+    search: function(search, cb) {
+      if (!!search || !cachedHomes) {
+        cachedHomes = AppHome.query(search, cb);
+      }
+      return cachedHomes;
+    },
+    
+    get: function(id) {
+      var home;
+      cachedHomes.forEach(function (hme) {
+        if (hme._id === id) {
+          home = hme;
+        }
+      });
+      return !home ? AppHome.get({id: id}) : home;
+    }
+  };
+});
