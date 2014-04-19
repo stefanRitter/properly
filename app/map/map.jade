@@ -1,6 +1,34 @@
 
 div#map(google-map)
+
 div#searchBox
-//div#listView
+  .form
+    h2 Search Properly
+    .margin-top-sm
+      label Price:
+      input.half.pull-left(type="number" placeholder="Min" ng-model="search.priceMin")
+      | to
+      input.half.pull-right(type="number" placeholder="Max" ng-model="search.priceMax")
+    .form-group
+      label Bedrooms:
+      select(ng-model="search.bedrooms")
+        option Studio
+        option 1
+        option 2
+        option 3
+        option 4+
+    .form-group
+      label Pets:
+      select(ng-model="search.pets")
+        option None
+        option Yes
+        option Dog
+        option Cat
+    .form-group
+      input(type="checkbox" ng-model="search.smoker")
+      | Smoker
+    .form-group
+      .button-red Create Properly Alert
+
 div#blackout.ng-hide(ng-show="blackout")
 div#sideView

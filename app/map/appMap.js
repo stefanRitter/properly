@@ -32,7 +32,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       maxZoom: 20,
       zoomControl: false, // true to use zoomControlOptions below, false to remove all zoom controls.
       zoomControlOptions: {
-        style: google.maps.ZoomControlStyle.DEFAULT // Change to SMALL to force just the + and - buttons.
+        style: google.maps.ZoomControlStyle.SMALL // Change to SMALL to force just the + and - buttons.
       },
       center: latLang,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -49,9 +49,12 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     map = new google.maps.Map(element, mapOptions);
   }
 
-  function setMarker() {
+  function setMarker(data) {
+    if (data.loc.length !== 2) { return; }
+    var loc = new google.maps.LatLng(data.loc[0],data.loc[1]);
+
     var marker = new google.maps.Marker({
-      position: latLang,
+      position: loc,
       icon: bluePin,
       map: map
     });
@@ -71,7 +74,6 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     priority: 1000,
     controller: ['$scope', '$element', function($scope, $element) {
       init($element[0]);
-      setMarker();
 
       $scope.$on('appMapSetCenter', function(e, data) {
         map.setCenter(new google.maps.LatLng(data.lat, data.lng));
