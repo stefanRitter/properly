@@ -7,7 +7,7 @@ header.header(ng-controller="appHeaderCtrl")
   .header-logged-out.ng-hide(ng-hide="onPath('/pro') || isLoggedIn()")
     a.button-red(href="/join", ng-hide="onPath('/join', '/login')") Join
     a.button-gray.margin-left-sm(href="/login", ng-hide="onPath('/login')") Log in
-    a.button-gray.header-pro-link(href="/pro", ng-hide="onPath('/login')") Home owner?
+    a.button-lightgray.header-pro-link(href="/pro", ng-hide="onPath('/login')") Home owner?
 
 
   //- Logged in User
