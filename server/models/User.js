@@ -24,13 +24,17 @@ userSchema = mongoose.Schema({
   roles:    [String],
 
   alerts: [String],
-  homes: [String]
+  homes: [String],
+  savedHomes: [String]
 });
 
 userSchema.methods.addHome = function(home) {
   if (this.homes.indexOf(home._id) === -1) {
     this.homes.push(home._id);
-    // TODO: limit to max 100 homes
+    if (this.homes.length > 100) {
+      // limit to max 100 homes
+      this.homes.pop();
+    }
     this.save();
   }
 };
@@ -43,6 +47,7 @@ userSchema.methods.safe = function() {
     email: this.email,
     roles: this.roles,
     homes: this.homes,
+    savedHomes: this.savedHomes,
     alerts: this.alerts
   };
 };
