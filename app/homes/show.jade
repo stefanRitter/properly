@@ -3,7 +3,7 @@
 .show-page-actions.center
   span.icon-close(ng-click="close()" ng-show="homeFn.path('/map')") &times;
   
-  .button-gray 
+  .button-gray(ng-click="homeFn.save()")
     img.icon-heart(src="/img/heart.svg" alt="&hearts;")
     | &nbsp;&nbsp;Save
   
@@ -11,9 +11,34 @@
     img.icon-share(src="/img/share.svg" alt="&hearts;")
     | &nbsp;&nbsp;Share
   
-  .button-red(ng-click="close()") &hearts; Contact
-  .button-red(ng-click="close()") &hearts; Send Application
-  .button-red(ng-click="close()") &hearts; Report
+  .button-red(ng-click="homeFn.contact()") &hearts; Contact
+  .button-red(ng-click="homeFn.apply()") &hearts; Send Application
+  .button-red(ng-click="homeFn.report()") &hearts; Report Spam
 
 h1 Show home
-div {{ home._id | timeAgoFromId }}
+p
+  | Posted 
+  | {{ home._id | timeAgoFromId }}
+
+h2 Details
+ul
+  li Long rent: {{home.longRent}}
+  li Short rent: {{home.shortRent}}
+  li Price per month: {{home.price}} | {{home.bills}}
+  li Furnished: {{home.furnished}}
+  li Pets: {{home.pets}}
+
+h2 Size
+ul
+  li Type: {{home.type}}
+  li {{home.size}} {{home.dimSys}}
+  li {{home.bedrooms}} Bedrooms
+  li {{home.bathrooms}} Bathrooms
+  li {{home.livingrooms}} Livingrooms
+
+h2 Features
+ul(ng-repeat="feature in home.features")
+  li {{feature}}
+
+h2 Description
+p {{ home.description }}

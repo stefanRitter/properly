@@ -18,7 +18,7 @@ homeSchema = mongoose.Schema({
   
   bedrooms: {type: Number, index: true},
   bathrooms: {type: Number, index: true},
-  livingRooms: {type: Number, index: true},
+  livingrooms: {type: Number, index: true},
     
   postcode: {type: String},
   address: {type: String},

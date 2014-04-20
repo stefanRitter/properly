@@ -656,18 +656,33 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
   'use strict';
 
   $scope.home = appCachedHomes.get($routeParams.id);
-  $scope.homeFn = appHomeShowFn;
+  $scope.homeFn = appHomeShowFn($scope);
 });
 ;angular.module('app').factory('appHomeShowFn', function ($location) {
   'use strict';
 
-  // export all the functionality for showing a home in it's different contexts throughout the app
-  // as standalone view
-  // or as part of the home-side-view directive
-  return {
-    path: function(path) {
-      return $location.path() === path;
-    }
+  // export all the functionality of a home show view
+  // in it's different contexts throughout the app
+  // as standalone view or as part of the home-side-view directive
+
+  return function($scope) {
+    return {
+      path: function(path) {
+        return $location.path() === path;
+      },
+      save: function() {
+        window.alert($scope.home._id);
+      },
+      apply: function() {
+        window.alert($scope.home._id);
+      },
+      contact: function() {
+        window.alert($scope.home._id);
+      },
+      report: function() {
+        window.alert($scope.home._id);
+      }
+    };
   };
 });;angular.module('app').directive('homeSideView', function (appCachedHomes, appHomeShowFn) {
   'use strict';
@@ -677,8 +692,9 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
     replace: false,
     priority: 1000,
     templateUrl: '/partials/homes/show',
-    controller: ['$scope', '$element', function($scope) {
-      $scope.homeFn = appHomeShowFn;
+    
+    controller: ['$scope', function($scope) {
+      $scope.homeFn = appHomeShowFn($scope);
       $scope.home = {};
 
       $scope.$on('appShowHome', function(e, data) {

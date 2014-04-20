@@ -6,8 +6,9 @@ angular.module('app').directive('homeSideView', function (appCachedHomes, appHom
     replace: false,
     priority: 1000,
     templateUrl: '/partials/homes/show',
-    controller: ['$scope', '$element', function($scope) {
-      $scope.homeFn = appHomeShowFn;
+    
+    controller: ['$scope', function($scope) {
+      $scope.homeFn = appHomeShowFn($scope);
       $scope.home = {};
 
       $scope.$on('appShowHome', function(e, data) {

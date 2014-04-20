@@ -2,5 +2,5 @@ angular.module('app').controller('appHomeShowCtrl', function ($scope, $routePara
   'use strict';
 
   $scope.home = appCachedHomes.get($routeParams.id);
-  $scope.homeFn = appHomeShowFn;
+  $scope.homeFn = appHomeShowFn($scope);
 });
