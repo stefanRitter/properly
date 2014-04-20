@@ -798,6 +798,11 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     });
   }
 
+  function focusMap(lat, lng) {
+    map.setCenter(new google.maps.LatLng(lat, lng));
+    map.setZoom(16);
+  }
+
   return {
     restrict: 'A',
     replace: false,
@@ -805,9 +810,12 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     controller: ['$scope', '$element', '$rootScope', function($scope, $element, $rootScope) {
       init($element[0]);
 
+      if (!!$scope.home.loc) {
+        focusMap($scope.home.loc[0], $scope.home.loc[1]);
+      }
+
       $scope.$on('appMapSetCenter', function(e, data) {
-        map.setCenter(new google.maps.LatLng(data.lat, data.lng));
-        map.setZoom(16);
+        focusMap(data.lat, data.lng);
       });
       
       $scope.$on('appMapSetMarker', function(e, data) {
