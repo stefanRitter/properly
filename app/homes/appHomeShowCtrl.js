@@ -1,5 +1,5 @@
-angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams) {
+angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams, appCachedHomes) {
   'use strict';
 
-  $scope.id = $routeParams.id;
+  $scope.home = appCachedHomes.get($routeParams.id);
 });

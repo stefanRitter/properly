@@ -429,7 +429,47 @@ angular.module('app').directive('checklistModel', ['$parse', '$compile', functio
     }
   };
 });
-;angular.module('app').factory('appTopics', function ($window) {
+;angular.module('app').filter('timeAgoFromId', function() {
+  'use strict';
+
+  /*
+   * JavaScript Pretty Date
+   * Copyright (c) 2011 John Resig (ejohn.org)
+   * Licensed under the MIT and GPL licenses.
+   */
+
+  // Takes an ISO time and returns a string representing how
+  // long ago the date represents.
+  function prettyDate(time) {
+    /*jshint maxcomplexity: false */
+    var date = new Date((time || '').replace(/-/g,'/').replace(/[TZ]/g,' ')),
+      diff = (((new Date()).getTime() - date.getTime()) / 1000),
+      day_diff = Math.floor(diff / 86400);
+        
+    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 ) { return; }
+        
+    return day_diff === 0 && (
+        diff < 60 && 'just now' ||
+        diff < 120 && '1 minute ago' ||
+        diff < 3600 && Math.floor( diff / 60 ) + ' minutes ago' ||
+        diff < 7200 && '1 hour ago' ||
+        diff < 86400 && Math.floor( diff / 3600 ) + ' hours ago') ||
+      day_diff === 1 && 'Yesterday' ||
+      day_diff < 7 && day_diff + ' days ago' ||
+      day_diff < 31 && Math.ceil( day_diff / 7 ) + ' weeks ago';
+  }
+
+  function extractTimeFromId(id) {
+    return new Date(parseInt(id.slice(0,8), 16)*1000).toISOString();
+  }
+
+  return function(mongoDbId) {
+    if (!!mongoDbId) {
+      var time = extractTimeFromId(mongoDbId);
+      return prettyDate(time);
+    }
+  };
+});;angular.module('app').factory('appTopics', function ($window) {
   'use strict';
 
   var topics = [];
@@ -612,12 +652,12 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
     });
   };
 });
-;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams) {
+;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams, appCachedHomes) {
   'use strict';
 
-  $scope.id = $routeParams.id;
+  $scope.home = appCachedHomes.get($routeParams.id);
 });
-;angular.module('app').directive('homeSideView', function (appCachedHomes) {
+;angular.module('app').directive('homeSideView', function (appCachedHomes, $location) {
   'use strict';
 
   return {
@@ -627,6 +667,7 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
     templateUrl: '/partials/homes/show',
     controller: ['$scope', '$element', function($scope) {
       $scope.home = {};
+      $scope.path = $location.path();
 
       $scope.$on('appShowHome', function(e, data) {
         if ($scope.home._id === data._id) { return; }
@@ -636,6 +677,16 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
         $scope.home._id = data._id;
         $scope.home = appCachedHomes.get(data._id);
       });
+
+      $scope.$on('appCloseShowHome', function() {
+        $scope.close();
+      });
+
+      $scope.close = function() {
+        angular.element(document.getElementById('blackout')).removeClass('show');
+        angular.element(document.getElementById('homeView')).removeClass('show');
+        $scope.home = {};
+      };
     }]
   };
 });
@@ -740,7 +791,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     }]
   };
 });
-;angular.module('app').controller('appMapCtrl', function ($scope, appCachedHomes, appMap) {
+;angular.module('app').controller('appMapCtrl', function ($scope, $rootScope, appCachedHomes, appMap) {
   'use strict';
 
   $scope.search = {
@@ -759,6 +810,10 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
       appMap.setMarker(markerData);
     });
   });
+
+  $scope.closeView = function() {
+    $rootScope.$broadcast('appCloseShowHome');
+  };
 });
 ;angular.module('app').factory('appGeocoder', function (appGoogle, $q) {
   'use strict';

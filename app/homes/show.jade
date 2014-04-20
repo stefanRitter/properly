@@ -1,2 +1,12 @@
 .header-spacer
+
+.show-page-actions.center
+  span.bold.big(ng-click="close()") &times;
+  .button-red(ng-click="close()") &hearts; Save
+  .button-red(ng-click="close()") &hearts; Share
+  .button-red(ng-click="close()") &hearts; Contact
+  .button-red(ng-click="close()") &hearts; Send Application
+  .button-red(ng-click="close()") &hearts; Report
+
 h1 Show home
+div {{ home._id | timeAgoFromId }}

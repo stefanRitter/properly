@@ -1,4 +1,4 @@
-angular.module('app').controller('appMapCtrl', function ($scope, appCachedHomes, appMap) {
+angular.module('app').controller('appMapCtrl', function ($scope, $rootScope, appCachedHomes, appMap) {
   'use strict';
 
   $scope.search = {
@@ -17,4 +17,8 @@ angular.module('app').controller('appMapCtrl', function ($scope, appCachedHomes,
       appMap.setMarker(markerData);
     });
   });
+
+  $scope.closeView = function() {
+    $rootScope.$broadcast('appCloseShowHome');
+  };
 });

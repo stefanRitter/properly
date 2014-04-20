@@ -1,4 +1,4 @@
-angular.module('app').directive('homeSideView', function (appCachedHomes) {
+angular.module('app').directive('homeSideView', function (appCachedHomes, $location) {
   'use strict';
 
   return {
@@ -8,6 +8,7 @@ angular.module('app').directive('homeSideView', function (appCachedHomes) {
     templateUrl: '/partials/homes/show',
     controller: ['$scope', '$element', function($scope) {
       $scope.home = {};
+      $scope.path = $location.path();
 
       $scope.$on('appShowHome', function(e, data) {
         if ($scope.home._id === data._id) { return; }
@@ -17,6 +18,16 @@ angular.module('app').directive('homeSideView', function (appCachedHomes) {
         $scope.home._id = data._id;
         $scope.home = appCachedHomes.get(data._id);
       });
+
+      $scope.$on('appCloseShowHome', function() {
+        $scope.close();
+      });
+
+      $scope.close = function() {
+        angular.element(document.getElementById('blackout')).removeClass('show');
+        angular.element(document.getElementById('homeView')).removeClass('show');
+        $scope.home = {};
+      };
     }]
   };
 });
