@@ -15,8 +15,10 @@ angular.module('app').directive('homeSideView', function (appCachedHomes, $locat
         angular.element(document.getElementById('blackout')).addClass('show');
         angular.element(document.getElementById('homeView')).addClass('show');
 
-        $scope.home._id = data._id;
-        $scope.home = appCachedHomes.get(data._id);
+        $scope.$apply(function() {
+          $scope.home._id = data._id;
+          $scope.home = appCachedHomes.get(data._id);
+        });
       });
 
       $scope.$on('appCloseShowHome', function() {
