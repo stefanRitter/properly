@@ -73,7 +73,7 @@ exports.updateHome = function (req, res) {
         res.status(400);
         return res.send({reason: err.toString()});
       }
-      req.user.addHome(home);
+      req.user.addProHome(home);
       res.json(home);
     });
   });

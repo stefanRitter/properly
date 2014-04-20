@@ -28,7 +28,7 @@ userSchema = mongoose.Schema({
   savedHomes: [String]
 });
 
-userSchema.methods.addHome = function(home) {
+userSchema.methods.addProHome = function(home) {
   if (this.homes.indexOf(home._id) === -1) {
     this.homes.push(home._id);
     if (this.homes.length > 100) {
