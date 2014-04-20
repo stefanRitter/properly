@@ -81,7 +81,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     controller: ['$scope', '$element', '$rootScope', function($scope, $element, $rootScope) {
       init($element[0]);
 
-      if (!!$scope.home.loc) {
+      if (!!$scope.home && !!$scope.home.loc) {
         focusMap($scope.home.loc[0], $scope.home.loc[1]);
       }
 
