@@ -652,12 +652,24 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
     });
   };
 });
-;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams, appCachedHomes) {
+;angular.module('app').controller('appHomeShowCtrl', function ($scope, $routeParams, appCachedHomes, appHomeShowFn) {
   'use strict';
 
   $scope.home = appCachedHomes.get($routeParams.id);
+  $scope.homeFn = appHomeShowFn;
 });
-;angular.module('app').directive('homeSideView', function (appCachedHomes, $location) {
+;angular.module('app').factory('appHomeShowFn', function ($location) {
+  'use strict';
+
+  // export all the functionality for showing a home in it's different contexts throughout the app
+  // as standalone view
+  // or as part of the home-side-view directive
+  return {
+    path: function(path) {
+      return $location.path() === path;
+    }
+  };
+});;angular.module('app').directive('homeSideView', function (appCachedHomes, appHomeShowFn) {
   'use strict';
 
   return {
@@ -666,8 +678,8 @@ angular.module('app').factory('appCachedHomes', function (AppHome) {
     priority: 1000,
     templateUrl: '/partials/homes/show',
     controller: ['$scope', '$element', function($scope) {
+      $scope.homeFn = appHomeShowFn;
       $scope.home = {};
-      $scope.path = $location.path();
 
       $scope.$on('appShowHome', function(e, data) {
         if ($scope.home._id === data._id) { return; }

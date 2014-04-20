@@ -1,4 +1,4 @@
-angular.module('app').directive('homeSideView', function (appCachedHomes, $location) {
+angular.module('app').directive('homeSideView', function (appCachedHomes, appHomeShowFn) {
   'use strict';
 
   return {
@@ -7,8 +7,8 @@ angular.module('app').directive('homeSideView', function (appCachedHomes, $locat
     priority: 1000,
     templateUrl: '/partials/homes/show',
     controller: ['$scope', '$element', function($scope) {
+      $scope.homeFn = appHomeShowFn;
       $scope.home = {};
-      $scope.path = $location.path();
 
       $scope.$on('appShowHome', function(e, data) {
         if ($scope.home._id === data._id) { return; }

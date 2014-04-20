@@ -1,9 +1,16 @@
 .header-spacer
 
 .show-page-actions.center
-  span.bold.big(ng-click="close()") &times;
-  .button-red(ng-click="close()") &hearts; Save
-  .button-red(ng-click="close()") &hearts; Share
+  span.icon-close(ng-click="close()" ng-show="homeFn.path('/map')") &times;
+  
+  .button-gray 
+    img.icon-heart(src="/img/heart.svg" alt="&hearts;")
+    | &nbsp;&nbsp;Save
+  
+  a.button-red(href="/home/{{home._id}}")
+    img.icon-share(src="/img/share.svg" alt="&hearts;")
+    | &nbsp;&nbsp;Share
+  
   .button-red(ng-click="close()") &hearts; Contact
   .button-red(ng-click="close()") &hearts; Send Application
   .button-red(ng-click="close()") &hearts; Report

@@ -12,7 +12,9 @@ header.header(ng-controller="appHeaderCtrl")
 
   //- Logged in User
   .header-logged-in.ng-hide(ng-show="isLoggedIn('user')")
-    a.button-gray(href="/saved") &hearts;&nbsp;&nbsp;Saved
+    a.button-gray(href="/saved") 
+      img.icon-heart(src="/img/heart.svg" alt="&hearts;")
+      | &nbsp;&nbsp;Saved
     .header-dropdown-toggle(ng-click="toggleDropdown()")
       | Account
       .arrow-down-black.margin-left
