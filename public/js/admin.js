@@ -911,7 +911,7 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
 ;angular.module('app').controller('appProfileEditCtrl', function ($scope, $routeParams, $location, appIdentity) {
   'use strict';
 
-  //var steps = ['basic', 'references'];
+  //var steps = ['basic', 'references', 'verify'];
 
   $scope.step = $routeParams.step;
   $scope.profile = appIdentity.currentUser.profile;
@@ -929,10 +929,10 @@ angular.module('app').directive('googleMap', function (appGoogle, appIsMobile) {
     return step === $scope.step;
   };
 });
-;angular.module('app').controller('appProfileShowCtrl', function ($scope) {
+;angular.module('app').controller('appProfileShowCtrl', function ($scope, $routeParams) {
   'use strict';
 
-  $scope.id = 0;
+  $scope.profile = $routeParams.id;
 });
 ;angular.module('app').controller('appSavedCtrl', function ($scope) {
   'use strict';

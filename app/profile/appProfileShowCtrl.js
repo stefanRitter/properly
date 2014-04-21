@@ -1,5 +1,5 @@
-angular.module('app').controller('appProfileShowCtrl', function ($scope) {
+angular.module('app').controller('appProfileShowCtrl', function ($scope, $routeParams) {
   'use strict';
 
-  $scope.id = 0;
+  $scope.profile = $routeParams.id;
 });

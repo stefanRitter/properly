@@ -2,5 +2,6 @@
 .edit-header
   a(ng-click="nextStep('basic')" ng-class="{'active': activeStep('basic')}") Basic
   a(ng-click="nextStep('references')" ng-class="{'active': activeStep('references')}") References
+  a(ng-click="nextStep('verify')" ng-class="{'active': activeStep('verify')}") Verify
 
 div(ng-include="getStep()")

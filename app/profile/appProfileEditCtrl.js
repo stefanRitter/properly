@@ -1,7 +1,7 @@
 angular.module('app').controller('appProfileEditCtrl', function ($scope, $routeParams, $location, appIdentity) {
   'use strict';
 
-  //var steps = ['basic', 'references'];
+  //var steps = ['basic', 'references', 'verify'];
 
   $scope.step = $routeParams.step;
   $scope.profile = appIdentity.currentUser.profile;
