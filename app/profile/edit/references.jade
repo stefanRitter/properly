@@ -1,0 +1,16 @@
+.center
+  h2.italic.margin.center Add References
+
+  form.form(name="referencesForm")
+    .form-group
+      label Employer*
+      input(name="email", type="text", placeholder="Job Title", ng-model="fisrtName", required)
+    
+    .form-group
+      button.button-red.medium(ng-click="verify()", ng-disabled="referencesForm.$invalid") Next
+      br
+      span.required * required
+
+    .form-group
+      .error {{notifier.error}}
+      .notice {{notifier.notice}}

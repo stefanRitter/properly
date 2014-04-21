@@ -35,7 +35,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
   // user urls - must be verified or admin, not pro user
   $routeProvider
     .when('/verify',  {templateUrl: '/partials/profile/edit', controller: 'appVerifyCtrl'})
-    .when('/account/profile', {templateUrl: '/partials/profile/edit', controller: 'appProfileEditCtrl',
+    .when('/account/profile/:step', {templateUrl: '/partials/profile/edit', controller: 'appProfileEditCtrl',
       resolve: routeRoleChecks.user});
   
   // shared urls - must be logged in

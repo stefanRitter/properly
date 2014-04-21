@@ -1,5 +1,21 @@
-angular.module('app').controller('appProfileEditCtrl', function ($scope) {
+angular.module('app').controller('appProfileEditCtrl', function ($scope, $routeParams, $location, appIdentity) {
   'use strict';
 
-  $scope.id = 0;
+  //var steps = ['basic', 'references'];
+
+  $scope.step = $routeParams.step;
+  $scope.profile = appIdentity.currentUser.profile;
+
+
+  $scope.getStep = function() {
+    return '/partials/profile/edit/'+$scope.step;
+  };
+
+  $scope.nextStep = function(step) {
+    $location.path('/account/profile/'+step);
+  };
+
+  $scope.activeStep = function(step) {
+    return step === $scope.step;
+  };
 });

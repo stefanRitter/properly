@@ -17,15 +17,31 @@ userSchema = mongoose.Schema({
 
   logins: [String],
   
-  name:     {type: String, trim: true, required: false},
-  
   salt:     {type: String, required: '{PATH} is required!'},
   password: {type: String, required: '{PATH} is required!'},
   roles:    [String],
 
   alerts: [String],
   homes: [String],
-  savedHomes: [String]
+  savedHomes: [String],
+
+  avatar: {type: String},
+
+  profile: {
+    firstName: {type: String, trim: true},
+    lastName: {type: String, trim: true},
+    curretTitle: {type: String, trim: true},
+    coTenants: {type: Number},
+    phoneNum: {type: Number},
+    householdIncome: {type: String},
+    pets: {type: String}
+  },
+
+  verified: {
+    phoneNum: {type: Boolean, default: false},
+    email: {type: Boolean, default: false},
+    householdIncome: {type: Boolean, default: false}
+  }
 });
 
 userSchema.methods.addProHome = function(home) {
@@ -43,12 +59,13 @@ userSchema.methods.addProHome = function(home) {
 userSchema.methods.safe = function() {
   return {
     _id: this._id,
-    name: this.name,
     email: this.email,
     roles: this.roles,
     homes: this.homes,
     savedHomes: this.savedHomes,
-    alerts: this.alerts
+    alerts: this.alerts,
+    profile: this.profile,
+    avatar: this.avatar
   };
 };
 

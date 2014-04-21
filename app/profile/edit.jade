@@ -1,53 +1,6 @@
 .header-spacer
-.center
-  h1 Edit profile
+.edit-header
+  a(ng-click="nextStep('basic')" ng-class="{'active': activeStep('basic')}") Basic
+  a(ng-click="nextStep('references')" ng-class="{'active': activeStep('references')}") References
 
-form.form(name="verifyForm")
-  h2.margin-top-big.italic Welcome to Properly
-  p Allmost home:
-  p Become verified to apply with one click
-
-  .form-group
-    label First Name*
-    input(name="email", type="text", placeholder="Job Title", ng-model="fisrtName", required)
-
-  .form-group
-    label Family Name*
-    input(name="email", type="text", placeholder="Job Title", ng-model="lastName", required)
-
-  .form-group
-    label Job Title*
-    input(name="email", type="text", placeholder="Job Title", ng-model="jobTitle", required)
-  
-  .form-group
-    label Picture* (+ tick to use linkedin image)
-    input(name="email", type="text", placeholder="Picture", ng-model="image", required)
-  
-  .form-group
-    label Employer*
-    input(name="email", type="text", placeholder="Employer", ng-model="employer", required)
-
-  .form-group
-    label Income*
-    input(name="email", type="text", placeholder="Income", ng-model="income", required)
-
-  .form-group
-    label Phone number*
-    input(name="email", type="text", placeholder="Phone number", ng-model="phoneNumber", required)
-
-  .form-group
-    label Pets*
-    input(name="email", type="text", placeholder="Pets", ng-model="pets", required)
-
-  .form-group
-    label No of co-tenants*
-    input(name="email", type="text", placeholder="No of co-tenants", ng-model="noTenants", required)
-  
-  .form-group
-    button.button-red.medium(ng-click="verify()", ng-disabled="verifyForm.$invalid") Complete
-    br
-    span.required * required
-
-  .form-group
-    .error {{notifier.error}}
-    .notice {{notifier.notice}}
+div(ng-include="getStep()")
